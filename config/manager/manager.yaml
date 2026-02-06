@@ -3,8 +3,13 @@ kind: Namespace
 metadata:
   labels:
     control-plane: controller-manager
-    app.kubernetes.io/name: blanketops-environments-operator
-    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+    app.kubernetes.io/version: v0.0.1
+    environments.blanketops.dev/api-version: v0.0.1
+    environments.blanketops.dev/contract-version: v0.0.5
+    environments.blanketops.dev/controller-version: v0.0.3
+    environments.blanketops.dev/operator-version: v0.0.3
   name: system
 ---
 apiVersion: apps/v1
@@ -14,8 +19,13 @@ metadata:
   namespace: system
   labels:
     control-plane: controller-manager
-    app.kubernetes.io/name: blanketops-environments-operator
-    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+    app.kubernetes.io/version: v0.0.1
+    environments.blanketops.dev/api-version: v0.0.1
+    environments.blanketops.dev/contract-version: v0.0.5
+    environments.blanketops.dev/controller-version: v0.0.3
+    environments.blanketops.dev/operator-version: v0.0.3
 spec:
   selector:
     matchLabels:
