@@ -4,20 +4,20 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.20.0
-  name: serviceunits.environments.blanketops.dev
+  name: environments.environments.blanketops.dev
 spec:
   group: environments.blanketops.dev
   names:
-    kind: ServiceUnit
-    listKind: ServiceUnitList
-    plural: serviceunits
-    singular: serviceunit
+    kind: Environment
+    listKind: EnvironmentList
+    plural: environments
+    singular: environment
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ServiceUnit is the Schema for the serviceunits API
+        description: Environment is the Schema for the environments API
         properties:
           apiVersion:
             description: |-
@@ -37,19 +37,19 @@ spec:
           metadata:
             type: object
           spec:
-            description: spec defines the desired state of ServiceUnit
+            description: spec defines the desired state of Environment
             properties:
               foo:
-                description: foo is an example field of ServiceUnit. Edit serviceunit_types.go
+                description: foo is an example field of Environment. Edit environment_types.go
                   to remove/update
                 type: string
             type: object
           status:
-            description: status defines the observed state of ServiceUnit
+            description: status defines the observed state of Environment
             properties:
               conditions:
                 description: |-
-                  conditions represent the current state of the ServiceUnit resource.
+                  conditions represent the current state of the Environment resource.
                   Each condition has a unique type and reflects the status of a specific aspect of the resource.
 
                   Standard condition types include:

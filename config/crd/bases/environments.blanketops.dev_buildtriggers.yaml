@@ -14,7 +14,7 @@ spec:
     singular: buildtrigger
   scope: Namespaced
   versions:
-  - name: v1
+  - name: v1alpha1
     schema:
       openAPIV3Schema:
         description: BuildTrigger is the Schema for the buildtriggers API

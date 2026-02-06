@@ -14,7 +14,7 @@ spec:
     singular: gitrepository
   scope: Namespaced
   versions:
-  - name: v1
+  - name: v1alpha1
     schema:
       openAPIV3Schema:
         description: GitRepository is the Schema for the gitrepositories API

@@ -14,7 +14,7 @@ spec:
     singular: deployment
   scope: Namespaced
   versions:
-  - name: v1
+  - name: v1alpha1
     schema:
       openAPIV3Schema:
         description: Deployment is the Schema for the deployments API
