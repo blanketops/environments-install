@@ -4,6 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: blanketops-environments-operator
     app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/version: v0.0.1
   name: leader-election-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io

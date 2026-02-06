@@ -11,6 +11,7 @@ metadata:
   labels:
     app.kubernetes.io/name: blanketops-environments-operator
     app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/version: v0.0.1
   name: sources-gitrepository-admin-role
 rules:
 - apiGroups:
