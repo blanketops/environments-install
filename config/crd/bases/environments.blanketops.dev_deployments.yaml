@@ -17,7 +17,11 @@ spec:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Deployment is the Schema for the deployments API
+        description: |-
+          Deployment represents a declarative request to Deployment an artifact.
+
+          This resource is a Kubernetes-native envelope around a
+          transport-agnostic BlanketOps Deployment contract.
         properties:
           apiVersion:
             description: |-
@@ -37,27 +41,41 @@ spec:
           metadata:
             type: object
           spec:
-            description: spec defines the desired state of Deployment
+            description: |-
+              DeploymentSpec is a Kubernetes-native envelope around the canonical
+              BlanketOps Deployment contract.
+
+              IMPORTANT:
+              - Kubernetes does NOT understand the contents of `Contract`
+              - Kubernetes does NOT validate the contents of `Contract`
+              - Kubernetes ONLY stores and round-trips this field
+
+              Ownership boundaries:
+              - API server: envelope + metadata
+              - Controller: lifecycle orchestration
+              - Contract layer: semantic meaning
             properties:
-              foo:
-                description: foo is an example field of Deployment. Edit deployment_types.go
-                  to remove/update
-                type: string
+              contract:
+                description: |-
+                  Contract is the canonical BlanketOps Deployment specification.
+
+                  This field is intentionally opaque to Kubernetes and schema generation.
+                  It is preserved verbatim by the API server.
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+            required:
+            - contract
             type: object
           status:
-            description: status defines the observed state of Deployment
+            description: |-
+              DeploymentStatus represents observed state owned by the controller.
+
+              This mirrors the contract status but remains opaque to Kubernetes.
             properties:
               conditions:
                 description: |-
-                  conditions represent the current state of the Deployment resource.
-                  Each condition has a unique type and reflects the status of a specific aspect of the resource.
-
-                  Standard condition types include:
-                  - "Available": the resource is fully functional
-                  - "Progressing": the resource is being created or updated
-                  - "Degraded": the resource failed to reach or maintain its desired state
-
-                  The status of each condition is one of True, False, or Unknown.
+                  Conditions follows standard Kubernetes condition conventions.
+                  These are intended for kubectl, UIs, and ecosystem tooling.
                 items:
                   description: Condition contains details for one aspect of the current
                     state of this API Resource.
@@ -113,12 +131,14 @@ spec:
                   - type
                   type: object
                 type: array
-                x-kubernetes-list-map-keys:
-                - type
-                x-kubernetes-list-type: map
+              contract:
+                description: |-
+                  Contract is the canonical BlanketOps Deployment status.
+
+                  This field is opaque and preserved verbatim.
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
             type: object
-        required:
-        - spec
         type: object
     served: true
     storage: true
