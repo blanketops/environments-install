@@ -4,24 +4,24 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.20.0
-  name: routes.environments.blanketops.dev
+  name: environments.environments.blanketops.dev
 spec:
   group: environments.blanketops.dev
   names:
-    kind: Route
-    listKind: RouteList
-    plural: routes
-    singular: route
+    kind: Environment
+    listKind: EnvironmentList
+    plural: environments
+    singular: environment
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
-          Route represents a declarative request to Route an artifact.
+          Environment represents a declarative request to Environment an artifact.
 
           This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Route contract.
+          transport-agnostic BlanketOps Environment contract.
         properties:
           apiVersion:
             description: |-
@@ -42,8 +42,8 @@ spec:
             type: object
           spec:
             description: |-
-              RouteSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Route contract.
+              EnvironmentSpec is a Kubernetes-native envelope around the canonical
+              BlanketOps Environment contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -57,7 +57,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Route specification.
+                  Contract is the canonical BlanketOps Environment specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -68,7 +68,7 @@ spec:
             type: object
           status:
             description: |-
-              RouteStatus represents observed state owned by the controller.
+              EnvironmentStatus represents observed state owned by the controller.
 
               This mirrors the contract status but remains opaque to Kubernetes.
             properties:
@@ -133,7 +133,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Route status.
+                  Contract is the canonical BlanketOps Environment status.
 
                   This field is opaque and preserved verbatim.
                 type: object

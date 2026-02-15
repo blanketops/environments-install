@@ -1,7 +1,7 @@
 # This rule is not used by the project blanketops-environments-api itself.
 # It is provided to allow the cluster admin to help manage permissions for users.
 #
-# Grants permissions to create, update, and delete resources within the sources.blanketops.dev.
+# Grants permissions to create, update, and delete resources within the environments.blanketops.dev.
 # This role is intended for users who need to manage these resources
 # but should not control RBAC or manage permissions for others.
 
@@ -16,12 +16,12 @@ metadata:
     environments.blanketops.dev/contract-version: v0.0.8
     environments.blanketops.dev/controller-version: v0.0.3
     environments.blanketops.dev/operator-version: v0.0.3
-  name: sources-gitrepository-editor-role
+  name: environments-route-editor-role
 rules:
 - apiGroups:
-  - sources.blanketops.dev
+  - environments.blanketops.dev
   resources:
-  - gitrepositories
+  - routes
   verbs:
   - create
   - delete
@@ -31,8 +31,8 @@ rules:
   - update
   - watch
 - apiGroups:
-  - sources.blanketops.dev
+  - environments.blanketops.dev
   resources:
-  - gitrepositories/status
+  - routes/status
   verbs:
   - get

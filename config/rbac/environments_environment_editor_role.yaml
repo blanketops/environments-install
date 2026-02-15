@@ -1,4 +1,4 @@
-# This rule is not used by the project blanketops-environments-operator itself.
+# This rule is not used by the project blanketops-environments-api itself.
 # It is provided to allow the cluster admin to help manage permissions for users.
 #
 # Grants permissions to create, update, and delete resources within the environments.blanketops.dev.
@@ -13,15 +13,15 @@ metadata:
     app.kubernetes.io/part-of: blanketops
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.0.1
-    environments.blanketops.dev/contract-version: v0.0.5
+    environments.blanketops.dev/contract-version: v0.0.8
     environments.blanketops.dev/controller-version: v0.0.3
     environments.blanketops.dev/operator-version: v0.0.3
-  name: package-editor-role
+  name: environments-environment-editor-role
 rules:
 - apiGroups:
   - environments.blanketops.dev
   resources:
-  - packages
+  - environments
   verbs:
   - create
   - delete
@@ -33,6 +33,6 @@ rules:
 - apiGroups:
   - environments.blanketops.dev
   resources:
-  - packages/status
+  - environments/status
   verbs:
   - get

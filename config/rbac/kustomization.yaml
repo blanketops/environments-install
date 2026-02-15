@@ -20,30 +20,36 @@ resources:
 - metrics_reader_role.yaml
 # For each CRD, "Admin", "Editor" and "Viewer" roles are scaffolded by
 # default, aiding admins in cluster management. Those roles are
-# not used by the blanketops-environments-operator itself. You can comment the following lines
+# not used by the blanketops-environments-api itself. You can comment the following lines
 # if you do not want those helpers be installed with your Project.
-- environments_buildtrigger_admin_role.yaml
-- environments_buildtrigger_editor_role.yaml
-- environments_buildtrigger_viewer_role.yaml
-- events_githubevent_admin_role.yaml
-- events_githubevent_editor_role.yaml
-- events_githubevent_viewer_role.yaml
+- results_environmentresult_admin_role.yaml
+- results_environmentresult_editor_role.yaml
+- results_environmentresult_viewer_role.yaml
 - sources_gitrepository_admin_role.yaml
 - sources_gitrepository_editor_role.yaml
 - sources_gitrepository_viewer_role.yaml
-- serviceunit_admin_role.yaml
-- serviceunit_editor_role.yaml
-- serviceunit_viewer_role.yaml
-- route_admin_role.yaml
-- route_editor_role.yaml
-- route_viewer_role.yaml
-- deployment_admin_role.yaml
-- deployment_editor_role.yaml
-- deployment_viewer_role.yaml
-- package_admin_role.yaml
-- package_editor_role.yaml
-- package_viewer_role.yaml
-- build_admin_role.yaml
-- build_editor_role.yaml
-- build_viewer_role.yaml
+- events_githubevent_admin_role.yaml
+- events_githubevent_editor_role.yaml
+- events_githubevent_viewer_role.yaml
+- environments_package_admin_role.yaml
+- environments_package_editor_role.yaml
+- environments_package_viewer_role.yaml
+- environments_route_admin_role.yaml
+- environments_route_editor_role.yaml
+- environments_route_viewer_role.yaml
+- environments_serviceunit_admin_role.yaml
+- environments_serviceunit_editor_role.yaml
+- environments_serviceunit_viewer_role.yaml
+- environments_deployment_admin_role.yaml
+- environments_deployment_editor_role.yaml
+- environments_deployment_viewer_role.yaml
+- environments_buildtrigger_admin_role.yaml
+- environments_buildtrigger_editor_role.yaml
+- environments_buildtrigger_viewer_role.yaml
+- environments_build_admin_role.yaml
+- environments_build_editor_role.yaml
+- environments_build_viewer_role.yaml
+- environments_environment_admin_role.yaml
+- environments_environment_editor_role.yaml
+- environments_environment_viewer_role.yaml
 

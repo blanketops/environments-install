@@ -1,0 +1,13 @@
+## Append samples of your project ##
+resources:
+- environments_v1alpha1_environment.yaml
+- environments_v1alpha1_build.yaml
+- environments_v1alpha1_buildtrigger.yaml
+- environments_v1alpha1_deployment.yaml
+- environments_v1alpha1_serviceunit.yaml
+- environments_v1alpha1_route.yaml
+- environments_v1alpha1_package.yaml
+- events_v1alpha1_githubevent.yaml
+- sources_v1alpha1_gitrepository.yaml
+- results_v1_environmentresult.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
