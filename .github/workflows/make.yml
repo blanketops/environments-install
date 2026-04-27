@@ -32,8 +32,9 @@ jobs:
       - name: Make build-installer
         run: make build-installer
 
-      - name: Upload install.yaml
+      - name: Upload CLI Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: install-manifests
+          name: blanketops-environments-install
           path: dist/install.yaml
+          retention-days: 14
