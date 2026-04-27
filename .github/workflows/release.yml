@@ -1,17 +1,14 @@
 name: Release
-
 on:
     push:
         tags:
             - "v*"
-
 permissions:
     contents: write
-
+    actions: read
 jobs:
     release:
         runs-on: self-hosted
-
         steps:
             - name: Checkout tag
               uses: actions/checkout@v4
@@ -49,6 +46,7 @@ jobs:
                   workflow: make.yml
                   name: install-manifests
                   path: dist/
+                  branch: main
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
@@ -57,4 +55,4 @@ jobs:
                   files: |
                       dist/install.yaml
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_PAT }}
