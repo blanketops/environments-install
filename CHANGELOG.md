@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.6] - 2026-04-27
+
+### ⚙️ Miscellaneous Tasks
+
+- Sync develop with main after release/v0.0.5
+- *(release)* Update changelog for v0.0.5
+
+### Bugfix
+
+- *(make)* Fix install deps required init
+
+### Release
+
+- Merge release/v0.0.6 into main
+
 ## [0.0.5] - 2026-04-27
 
 ### ⚙️ Miscellaneous Tasks
