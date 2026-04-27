@@ -44,9 +44,9 @@ jobs:
               uses: dawidd6/action-download-artifact@v6
               with:
                   workflow: make.yml
-                  name: install-manifests
+                  name: blanketops-environments-install
                   path: dist/
-                  branch: main
+                  branch: release
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
