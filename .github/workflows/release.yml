@@ -46,6 +46,13 @@ jobs:
             - name: Generate release notes
               run: git-cliff --config .cliff.toml --latest --output RELEASE_NOTES.md
 
+            - name: Download install.yaml from Make workflow
+              uses: dawidd6/action-download-artifact@v6
+              with:
+                  workflow: make.yml
+                  name: install-manifests
+                  path: dist/
+
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
               with:
