@@ -10,7 +10,6 @@ metadata:
     environments.blanketops.dev/contract-version: v0.1.7
     environments.blanketops.dev/controller-version: v0.2.2
     environments.blanketops.dev/operator-version: v0.0.3
-
   name: system
 ---
 apiVersion: apps/v1
@@ -81,11 +80,11 @@ spec:
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
-          fieldPath: metadata.namespace
+                  fieldPath: metadata.namespace
         - name: POD_NAME
           valueFrom:
             fieldRef:
-          fieldPath: metadata.name
+              fieldPath: metadata.name
         ports: []
         securityContext:
           readOnlyRootFilesystem: true
