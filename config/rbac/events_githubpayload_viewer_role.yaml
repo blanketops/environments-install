@@ -1,7 +1,7 @@
 # This rule is not used by the project blanketops-environments-api itself.
 # It is provided to allow the cluster admin to help manage permissions for users.
 #
-# Grants read-only access to environments.blanketops.dev resources.
+# Grants read-only access to events.blanketops.dev resources.
 # This role is intended for users who need visibility into these resources
 # without permissions to modify them. It is ideal for monitoring purposes and limited-access viewing.
 
@@ -17,19 +17,19 @@ metadata:
     environments.blanketops.dev/controller-version: v0.2.2
     environments.blanketops.dev/operator-version: v0.0.3
 
-  name: environments-build-viewer-role
+  name: events-githubpayload-viewer-role
 rules:
 - apiGroups:
-  - environments.blanketops.dev
+  - events.blanketops.dev
   resources:
-  - builds
+  - githubpayloads
   verbs:
   - get
   - list
   - watch
 - apiGroups:
-  - environments.blanketops.dev
+  - events.blanketops.dev
   resources:
-  - builds/status
+  - githubpayloads/status
   verbs:
   - get
