@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.1.4
+
 ## [0.1.4] - 2026-04-27
 
 ### ⚙️ Miscellaneous Tasks
