@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.8] - 2026-04-27
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.0.7
+- Sync develop with main after release/v0.0.7
+
+### Bugfix
+
+- *(workflow)* On develop to fail fast please
+- *(workflow)* On develop to fail fast please
+- *(workflows)* Add release notes installer
+- *(workflows)* Add release to make workflow
+
+### Release
+
+- Merge release/v0.0.8 into main
+
 ## [0.0.7] - 2026-04-27
 
 ### ⚙️ Miscellaneous Tasks
