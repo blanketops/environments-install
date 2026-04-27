@@ -1,15 +1,12 @@
 name: Make
-
 on:
   push:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -17,6 +14,11 @@ jobs:
         uses: azure/setup-kubectl@v4
         with:
           version: "v1.28.0"
+
+      - name: Create kind cluster
+        uses: helm/kind-action@v1
+        with:
+          wait: 120s
 
       - name: Clean cache
         run: rm -rf bin/
