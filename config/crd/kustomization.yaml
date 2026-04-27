@@ -11,7 +11,6 @@ resources:
 - bases/environments.blanketops.dev_packages.yaml
 - bases/events.blanketops.dev_githubevents.yaml
 - bases/sources.blanketops.dev_gitrepositories.yaml
-- bases/results.blanketops.dev_environmentresults.yaml
 # +kubebuilder:scaffold:crdkustomizeresource
 
 patches:
