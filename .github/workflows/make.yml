@@ -32,7 +32,7 @@ jobs:
       - name: Make build-installer
         run: make build-installer
 
-      - name: Upload CLI Artifact
+      - name: Upload Operator Installer Artifact
         uses: actions/upload-artifact@v4
         with:
           name: blanketops-environments-install
