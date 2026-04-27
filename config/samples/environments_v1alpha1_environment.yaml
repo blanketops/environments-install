@@ -1,0 +1,14 @@
+apiVersion: environments.blanketops.dev/v1alpha1
+kind: Environment
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+    app.kubernetes.io/version: v0.0.1
+    environments.blanketops.dev/api-version: v0.1.4
+    environments.blanketops.dev/contract-version: v0.1.7
+    environments.blanketops.dev/controller-version: v0.2.2
+    environments.blanketops.dev/operator-version: v0.0.3
+
+  name: environment-sample
+spec: # TODO(user): Add fields here
