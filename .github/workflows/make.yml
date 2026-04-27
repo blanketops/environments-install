@@ -1,37 +1,37 @@
 name: Make
 
 on:
-    push:
-        branches: [ main ]
-    pull_request:
-        branches: [ main ]
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Install kubectl
-              uses: azure/setup-kubectl@v4
-              with:
-                  version: "v1.28.0"
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: "v1.28.0"
 
-            - name: Clean cache
-              run: rm -rf bin/
+      - name: Clean cache
+        run: rm -rf bin/
 
-            - name: Make build
-              run: make build
+      - name: Make build
+        run: make build
 
-            - name: Make validate
-              run: make validate
+      - name: Make validate
+        run: make validate
 
-            - name: Make build-installer
-              run: make build-installer
+      - name: Make build-installer
+        run: make build-installer
 
-            - name: Upload install.yaml
-              uses: actions/upload-artifact@v4
-              with:
-                  name: install-manifests
-                  path: dist/install.yaml
+      - name: Upload install.yaml
+        uses: actions/upload-artifact@v4
+        with:
+          name: install-manifests
+          path: dist/install.yaml
