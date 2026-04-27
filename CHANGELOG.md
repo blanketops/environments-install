@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2026-04-27
+
+### ⚙️ Miscellaneous Tasks
+
+- Sync develop with main after release/v0.1.1
+
+### Bugfix
+
+- *(workflows)* Release workflow blocked
+
+### Release
+
+- Merge release/v0.1.2 into main
+
+## [0.1.1] - 2026-04-27
+
+### ⚙️ Miscellaneous Tasks
+
+- Sync develop with main after release/v0.1.0
+
+### Bugfix
+
+- *(workflows)* Artifacts download in release
+
+### Release
+
+- Merge release/v0.1.1 into main
+
+## [0.1.0] - 2026-04-27
+
+### ⚙️ Miscellaneous Tasks
+
+- Sync develop with main after release/v0.0.9
+- *(release)* Update changelog for v0.0.9
+
+### Bugfix
+
+- *(workflows)* Artifacts location mess sort out?
+
+### Release
+
+- Merge release/v0.1.0 into main
+
 ## [0.0.9] - 2026-04-27
 
 ### ⚙️ Miscellaneous Tasks
