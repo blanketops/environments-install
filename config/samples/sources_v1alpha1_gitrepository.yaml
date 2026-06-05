@@ -12,6 +12,15 @@ metadata:
     environments.blanketops.dev/contract-version: v0.1.7
     environments.blanketops.dev/controller-version: v0.2.2
     environments.blanketops.dev/operator-version: v0.0.3
-
-  name: gitrepository-sample
-spec: # TODO(user): Add fields here
+  name: gitrepository-for-kaniko-sample
+spec:
+  contract:
+    provider: github
+    hookUrl: https://elimination-propecia-meter-strips.trycloudflare.com/
+    repository:
+      owner: <repository-owner>
+      name: <repository-name>
+    webhooks:
+    - events:
+      - push
+      - pull_request
