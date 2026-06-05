@@ -1,5 +1,6 @@
 ## Append samples of your project ##
 resources:
+- environments_v1alpha1_aws_secretsore.yaml
 - environments_v1alpha1_environment.yaml
 - environments_v1alpha1_build.yaml
 - environments_v1alpha1_buildtrigger.yaml
