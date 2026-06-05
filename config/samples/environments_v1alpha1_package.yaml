@@ -11,7 +11,7 @@ metadata:
     environments.blanketops.dev/api-version: v0.1.4
     environments.blanketops.dev/contract-version: v0.1.7
     environments.blanketops.dev/controller-version: v0.2.3
-    environments.blanketops.dev/operator-version: v0.0.3
+    environments.blanketops.dev/operator-version: v0.2.1
   name: package-for-kaniko-sample
 spec:
   contract:
