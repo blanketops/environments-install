@@ -9,6 +9,14 @@ metadata:
     environments.blanketops.dev/contract-version: v0.1.7
     environments.blanketops.dev/controller-version: v0.2.2
     environments.blanketops.dev/operator-version: v0.0.3
-
-  name: githubevent-sample
-spec: # TODO(user): Add fields here
+  name: githubevent-for-kaniko-sample
+  namespace: default
+spec:
+  contract:
+    repository: <repository-owner>/<repository>
+    eventType: push
+    ref: refs/heads/main
+    webhook:
+      secretRef:
+        name: github-webhook-secret # from secretStore
+        key: secret
