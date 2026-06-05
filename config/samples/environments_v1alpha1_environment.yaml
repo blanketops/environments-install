@@ -15,3 +15,6 @@ metadata:
   name: environment-sample
 spec:
   contract:
+    secretStore:
+      name: blanketops-environments-aws    # | azure | gcp
+      kind: ClusterSecretStore
