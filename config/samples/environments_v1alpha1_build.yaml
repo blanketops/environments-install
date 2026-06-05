@@ -11,7 +11,7 @@ metadata:
     environments.blanketops.dev/controller-version: v0.2.2
     environments.blanketops.dev/operator-version: v0.0.3
   name: build-for-kaniko-sample
-  namespace: default
+  namespace: dev
 spec:
   contract:
     image: <image-registry>/<repository>/<appliation>:tag
@@ -47,7 +47,7 @@ metadata:
     environments.blanketops.dev/controller-version: v0.2.2
     environments.blanketops.dev/operator-version: v0.0.3
   name: build-for-buildah-managed-sample
-  namespace: default
+  namespace: dev
 spec:
   contract:
     image: <image-registry>/<repository>/<appliation>:tag
@@ -82,7 +82,7 @@ metadata:
     environments.blanketops.dev/controller-version: v0.2.2
     environments.blanketops.dev/operator-version: v0.0.3
   name: build-for-buildpacks-sample
-  namespace: default
+  namespace: dev
 spec:
   contract:
     image: <image-registry>/<repository>/<appliation>:tag
