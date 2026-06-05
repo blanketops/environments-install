@@ -4,11 +4,25 @@ metadata:
   labels:
     app.kubernetes.io/name: blanketops-environments
     app.kubernetes.io/part-of: blanketops
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.1.4
     environments.blanketops.dev/contract-version: v0.1.7
     environments.blanketops.dev/controller-version: v0.2.2
     environments.blanketops.dev/operator-version: v0.0.3
-
-  name: deployment-sample
-spec: # TODO(user): Add fields here
+  name: deployment-for-kaniko-sample
+spec:
+   contract:
+    serviceUnits:
+      - for-kaniko-app-api
+      - for-kaniko-app-worker
+    runtime: kubernetes.io/container-runtime #currently default and supported, in progress ecs,knative and azure
+    strategy: Rolling
+    imageAutomation: false
+    reconciliationStrategy: kustomize # default, planning to support helm
+    gitOwner: <repositoryOwner>
+    manifestsRepo:
+      url: ssh://git@github.com/<repository-owner/<repository>.git
+      cloneSecret: git-ssh-credentials # from secretStore
+      strategy: kustomization # build repo structure with kustomize defaults, to support helm in future
+      path: ./overlays/dev
