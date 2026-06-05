@@ -9,6 +9,16 @@ metadata:
     environments.blanketops.dev/contract-version: v0.1.7
     environments.blanketops.dev/controller-version: v0.2.2
     environments.blanketops.dev/operator-version: v0.0.3
-
-  name: buildtrigger-sample
-spec: # TODO(user): Add fields here
+  name: buildtrigger-for-kaniko-sample
+spec:
+   contract:
+    source: github # default
+    eventType: push
+    repository:
+      owner: <repository-owner>
+      name: <repository-name>
+    ref: refs/heads/main
+    buildRef:
+      name: build-for-kaniko-sample # existing build
+    payloadPolicy:
+      allow: true
