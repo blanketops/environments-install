@@ -2648,7 +2648,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        image: ghcr.io/ntlaletsi70/blanketops-environments-controller:v0.3.2
+        image: ghcr.io/ntlaletsi70/blanketops-environments-controller:v0.3.3
         livenessProbe:
           httpGet:
             path: /healthz
