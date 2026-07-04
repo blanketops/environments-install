@@ -1330,6 +1330,8 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  imagePullSecrets:
+  - name: ghcr-pull
   labels:
     app.kubernetes.io/name: blanketops-environments
     app.kubernetes.io/part-of: blanketops
@@ -2417,8 +2419,6 @@ spec:
       - args:
         - --leader-elect
         - --health-probe-bind-address=:8081
-        command:
-        - /manager
         env:
         - name: POD_NAMESPACE
           valueFrom:
