@@ -30,6 +30,9 @@ jobs:
 
       - name: Make build
         run: make build
+       
+      - name: Make Sync RBAC
+        run: make sync-rbac
 
       - name: Make validate
         run: make validate
