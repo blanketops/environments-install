@@ -10,6 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Go toolchain pinned to go.mod — single source of truth,
+      # never hardcoded in the workflow.
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
       - name: Install kubectl
         uses: azure/setup-kubectl@v4
         with:
@@ -38,3 +46,38 @@ jobs:
           name: blanketops-environments-install
           path: dist/install.yaml
           retention-days: 14
+
+      # Job summary — rendered on the workflow run page.
+      # always() so a red run still reports what it produced and where it died.
+      - name: Job summary
+        if: always()
+        run: |
+          {
+            echo "## BlanketOps Environments — Make"
+            echo ""
+            echo "| Item | Value |"
+            echo "| --- | --- |"
+            echo "| Ref | \`${GITHUB_REF_NAME}\` |"
+            echo "| Commit | \`${GITHUB_SHA::12}\` |"
+            echo "| Trigger | ${GITHUB_EVENT_NAME} |"
+            echo "| Go | \`$(grep '^go ' go.mod | awk '{print $2}')\` |"
+            echo "| kubectl | \`v1.28.0\` |"
+            echo "| Job status | **${{ job.status }}** |"
+            echo ""
+            if [ -f dist/install.yaml ]; then
+              echo "### Installer"
+              echo ""
+              echo "| Artifact | Size | Resources |"
+              echo "| --- | --- | --- |"
+              echo "| \`blanketops-environments-install\` | $(du -h dist/install.yaml | cut -f1) | $(grep -c '^kind:' dist/install.yaml) |"
+              echo ""
+              echo "CRDs included:"
+              echo ""
+              grep -A1 '^kind: CustomResourceDefinition' dist/install.yaml \
+                | grep -oP 'name: \K.*' | sort | sed 's/^/- `/' | sed 's/$/`/' || echo "_none detected_"
+            else
+              echo "### Installer"
+              echo ""
+              echo "⚠️ \`dist/install.yaml\` was not produced — build or installer step failed before artifact generation."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

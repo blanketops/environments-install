@@ -1,19 +1,15 @@
 name: Finalize Release
-
 on:
   workflow_dispatch:
     inputs:
       version:
         description: "Release version to finalize (e.g. v0.0.9)"
         required: true
-
 permissions:
   contents: write
-
 jobs:
   finalize:
-    runs-on: self-hosted
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -50,3 +46,18 @@ jobs:
       - name: Delete release branch
         run: |
           git push origin --delete release/${{ github.event.inputs.version }}
+      - name: Release Summary
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY <<EOF
+          # 🎉 Release Finalized **Version:** \`${{ github.event.inputs.version }}\` 
+          ## Completed 
+          - Merged \`release/${{ github.event.inputs.version }}\` into \`main\` 
+          - Created Git tag \`${{ github.event.inputs.version }}\` 
+          - Synced \`main\` back into \`develop\`
+          - Deleted release branch 
+          ## Branch Flow 
+          -  release/${{ github.event.inputs.version }} ↓ main ↓ develop 
+          ## Release Tag \`${{ github.event.inputs.version }}\` 
+          ## Next Steps
+          - Pushing the tag triggers the **Release** workflow which generates the changelog and GitHub Release. 
+          EOF

@@ -25,10 +25,15 @@ resources:
 - results_environmentresult_admin_role.yaml
 - results_environmentresult_editor_role.yaml
 - results_environmentresult_viewer_role.yaml
+- networks_route_admin_role.yaml
+- networks_route_editor_role.yaml
+- networks_route_viewer_role.yaml
+- networks_domain_admin_role.yaml
+- networks_domain_editor_role.yaml
+- networks_domain_viewer_role.yaml
 - sources_gitrepository_admin_role.yaml
 - sources_gitrepository_editor_role.yaml
 - sources_gitrepository_viewer_role.yaml
-- events_githubevent_admin_role.yaml
 - events_githubevent_editor_role.yaml
 - events_githubevent_viewer_role.yaml
 - environments_package_admin_role.yaml
@@ -52,4 +57,3 @@ resources:
 - environments_environment_admin_role.yaml
 - environments_environment_editor_role.yaml
 - environments_environment_viewer_role.yaml
-

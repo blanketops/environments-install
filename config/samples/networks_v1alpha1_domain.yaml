@@ -1,0 +1,63 @@
+apiVersion: networks.blanketops.dev/v1alpha1
+kind: Domain
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/version: v0.0.1
+    environments.blanketops.dev/name: environment-sample
+    environments.blanketops.dev/type: dev
+    environments.blanketops.dev/api-version: v0.1.4
+     environments.blanketops.dev/contract-version: v0.4.0
+    environments.blanketops.dev/controller-version: v0.2.5
+    environments.blanketops.dev/operator-version: v0.5.1
+  name: domain-for-kaniko-sample
+  namespace: dev
+spec:
+  contract:
+    # ──────────────────────────────────────────────────────────
+    # HOST
+    # The FQDN this domain assignment covers.
+    # platform: must match *.dev.domain.co.za wildcard pattern
+    # custom:   client-owned zone, any FQDN
+    # ──────────────────────────────────────────────────────────
+    host: "api.dev.domain.co.za"
+ 
+    # ──────────────────────────────────────────────────────────
+    # ROUTE REF
+    # The Route in this namespace this domain is assigned to.
+    # Route owns the workload binding (runtime, path, enabled).
+    # Domain owns the cert/mapping chain for the host.
+    # ──────────────────────────────────────────────────────────
+    routeRef:
+      name: shopping-app-route
+ 
+    # ──────────────────────────────────────────────────────────
+    # TLS STRATEGY
+    # platform: *.dev.domain.co.za wildcard cert covers this host
+    #           DNS01 ClusterIssuer already issued — nothing to do
+    #           controller emits DomainClaim + DomainMapping only
+    #
+    # custom:   client-owned zone (client-a.co.za)
+    #           controller emits Issuer + DomainClaim +
+    #           DomainMapping + Certificate
+    #           HTTP01 challenge via nginx solver
+    # ──────────────────────────────────────────────────────────
+    tlsStrategy: platform     # platform | custom
+ 
+    # ──────────────────────────────────────────────────────────
+    # mTLS
+    # Inter-service mTLS via blanketops-proxy + blanketK.
+    # Declared here — platform wires the sidecar identity.
+    # ──────────────────────────────────────────────────────────
+    mtls:
+      enforced: true
+ 
+    # ──────────────────────────────────────────────────────────
+    # RENEW BEFORE
+    # Cert renewal window. Only applies when tlsStrategy: custom.
+    # Ignored for platform — wildcard renewal is platform-managed.
+    # ──────────────────────────────────────────────────────────
+    renewBefore: "720h"
+ 

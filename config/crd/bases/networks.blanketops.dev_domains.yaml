@@ -4,24 +4,24 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.20.0
-  name: routes.environments.blanketops.dev
+  name: domains.networks.blanketops.dev
 spec:
-  group: environments.blanketops.dev
+  group: networks.blanketops.dev
   names:
-    kind: Route
-    listKind: RouteList
-    plural: routes
-    singular: route
+    kind: Domain
+    listKind: DomainList
+    plural: domains
+    singular: domain
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
-          Route represents a declarative request to Route an artifact.
+          Domain represents a declarative request to Domain an artifact.
 
           This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Route contract.
+          transport-agnostic BlanketOps Domain contract.
         properties:
           apiVersion:
             description: |-
@@ -42,8 +42,8 @@ spec:
             type: object
           spec:
             description: |-
-              RouteSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Route contract.
+              DomainSpec is a Kubernetes-native envelope around the canonical
+              BlanketOps Domain contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -57,7 +57,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Route specification.
+                  Contract is the canonical BlanketOps Domain specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -68,7 +68,7 @@ spec:
             type: object
           status:
             description: |-
-              RouteStatus represents observed state owned by the controller.
+              DomainStatus represents observed state owned by the controller.
 
               This mirrors the contract status but remains opaque to Kubernetes.
             properties:
@@ -133,7 +133,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Route status.
+                  Contract is the canonical BlanketOps Domain status.
 
                   This field is opaque and preserved verbatim.
                 type: object

@@ -7,9 +7,11 @@ resources:
 - bases/environments.blanketops.dev_buildtriggers.yaml
 - bases/environments.blanketops.dev_deployments.yaml
 - bases/environments.blanketops.dev_serviceunits.yaml
-- bases/environments.blanketops.dev_routes.yaml
 - bases/environments.blanketops.dev_packages.yaml
 - bases/events.blanketops.dev_githubevents.yaml
+- bases/events.blanketops.dev_githubpayloads.yaml
+- bases/networks.blanketops.dev_domains.yaml
+- bases/networks.blanketops.dev_routes.yaml
 - bases/sources.blanketops.dev_gitrepositories.yaml
 # +kubebuilder:scaffold:crdkustomizeresource
 
