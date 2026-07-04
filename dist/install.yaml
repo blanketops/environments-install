@@ -1328,10 +1328,10 @@ spec:
       status: {}
 ---
 apiVersion: v1
+imagePullSecrets:
+- name: ghcr-pull
 kind: ServiceAccount
 metadata:
-  imagePullSecrets:
-  - name: ghcr-pull
   labels:
     app.kubernetes.io/name: blanketops-environments
     app.kubernetes.io/part-of: blanketops
