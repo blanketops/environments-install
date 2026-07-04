@@ -92,6 +92,15 @@ deploy: check-tools ## Deploy BlanketOps Environments
 undeploy: check-tools ## Remove BlanketOps Environments
 	$(KUSTOMIZE) build config/default | $(KUBECTL) delete --ignore-not-found=$(ignore-not-found) -f -
 
+##@ Maintenance
+
+.PHONY: sync-rbac
+sync-rbac: ## Sync RBAC manifests from the controller repo
+	@echo "Syncing RBAC from blanketops-environments-controller..."
+	@# Replace the path below with the actual relative path to your controller repo
+	cp ../blanketops-environments-controller/config/rbac/role.yaml config/rbac/role.yaml
+	@echo "✔ RBAC synced"
+	
 ##@ Verification
 
 .PHONY: diff
