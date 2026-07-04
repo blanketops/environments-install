@@ -9,9 +9,9 @@ metadata:
     environments.blanketops.dev/name: environment-sample
     environments.blanketops.dev/type: dev
     environments.blanketops.dev/api-version: v0.1.4
-    environments.blanketops.dev/contract-version: v0.1.7
-    environments.blanketops.dev/controller-version: v0.2.3
-    environments.blanketops.dev/operator-version: v0.2.1
+     environments.blanketops.dev/contract-version: v0.4.0
+    environments.blanketops.dev/controller-version: v0.2.5
+    environments.blanketops.dev/operator-version: v0.5.1
   name: package-for-kaniko-sample
 spec:
   contract:
@@ -26,11 +26,11 @@ spec:
     - name: Neo
       email: neo@blanketops.online
     packageRepository:
-      url: git@github.com:ntlaletsi70/for-kaniko-app-packages.git
+      url: git@github.com:BlanketOps/for-kaniko-app-packages.git
       credentialsSecret: git-ssh-credentials-packages
     packageKappDiff: true
     stateRepo:
-      url: git@github.com:ntlaletsi70/for-kaniko-app-state.git
+      url: git@github.com:BlanketOps/for-kaniko-app-state.git
       ref:
         branch: master
       cloneSecret: git-ssh-credentials-state
