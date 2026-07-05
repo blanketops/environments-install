@@ -23,6 +23,15 @@ jobs:
               rm -rf git-cliff.tar.gz "git-cliff-${GITCLIFF_VERSION}"
               git-cliff --version
 
+        - name: Build installer
+          run: make build-installer
+
+        - name: Verify installer
+          run: |
+              test -s dist/install.yaml
+              echo "CRDs: $(grep -c '^kind: CustomResourceDefinition' dist/install.yaml)"
+              ! grep -q 'controller:latest' dist/install.yaml || { echo "ERROR: unpinned image in installer"; exit 1; }
+
         - name: Checkout main
           run: |
               git checkout main
@@ -46,47 +55,22 @@ jobs:
           uses: softprops/action-gh-release@v2
           with:
             body_path: RELEASE_NOTES.md
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        - name: Download install.yaml from Make workflow
-          uses: dawidd6/action-download-artifact@v6
-          with:
-            workflow: make.yml
-            name: blanketops-environments-install
-            path: dist/
-            branch: release
-
-        - name: Create GitHub Release
-          uses: softprops/action-gh-release@v2
-          with:
-            body_path: RELEASE_NOTES.md
             files: |
                   dist/install.yaml
           env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_PAT }}
-            
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         - name: Release Summary
           run: |
               cat >> $GITHUB_STEP_SUMMARY <<EOF
               # 📦 GitHub Release Published
-
               **Version:** \`${{ github.ref_name }}\`
-
               ## Completed
-
+              - Built \`dist/install.yaml\` from tag ${{ github.ref_name }}
               - Generated CHANGELOG.md using git-cliff
               - Committed changelog updates to main
               - Generated release notes
-              - Published GitHub Release
-
-              ## Artifacts
-
-              - CHANGELOG.md
-              - RELEASE_NOTES.md
-              - GitHub Release
-
-               ## Source Tag
-
-               \`${{ github.ref_name }}\`
-
+              - Published GitHub Release with installer attached
+              ## Assets
+              - install.yaml ($(du -h dist/install.yaml | cut -f1), $(grep -c '^kind:' dist/install.yaml) resources)
               EOF
