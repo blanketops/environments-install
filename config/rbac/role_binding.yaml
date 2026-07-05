@@ -11,11 +11,11 @@ metadata:
     environments.blanketops.dev/operator-version: v0.0.3
 
   name: manager-rolebinding
+subjects:
+- kind: ServiceAccount
+  name: blanketops-environments-controller-manager
+  namespace: blanketops-environments
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: manager-role
-subjects:
-- kind: ServiceAccount
-  name: controller-manager
-  namespace: system
