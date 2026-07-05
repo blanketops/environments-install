@@ -92,6 +92,15 @@ deploy: check-tools ## Deploy BlanketOps Environments
 undeploy: check-tools ## Remove BlanketOps Environments
 	$(KUSTOMIZE) build config/default | $(KUBECTL) delete --ignore-not-found=$(ignore-not-found) -f -
 
+##@ Maintenance
+
+.PHONY: sync-rbac
+sync-rbac: ## Sync RBAC manifests from the controller repo
+	@echo "Syncing RBAC from blanketops-environments-controller..."
+	@# Replace the path below with the actual relative path to your controller repo
+	cp ../blanketops-environments-controller/config/rbac/role.yaml config/rbac/role.yaml
+	@echo "✔ RBAC synced"
+	
 ##@ Verification
 
 .PHONY: diff
@@ -101,4 +110,7 @@ diff: check-tools ## Show diff against live cluster
 .PHONY: validate
 validate: check-tools ## Validate manifests with server-side dry run
 	$(KUBECTL) create namespace blanketops-environments-api-system --dry-run=client -o yaml | $(KUBECTL) apply -f -
+	$(KUBECTL) create namespace blanketops-environments --dry-run=client -o yaml | $(KUBECTL) apply -f -
+    # Wait for the namespace to actually exist before continuing
+	$(KUBECTL) wait --for=create namespace/blanketops-environments --timeout=30s
 	$(KUSTOMIZE) build config/default | $(KUBECTL) apply --dry-run=server -f -
