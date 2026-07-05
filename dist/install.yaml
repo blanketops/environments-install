@@ -1892,6 +1892,18 @@ rules:
   - create
   - patch
 - apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
   - argoproj.io
   resources:
   - eventsources
@@ -1920,6 +1932,19 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - certificates
+  - issuers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups:
   - data.packaging.carvel.dev
   resources:
@@ -2005,6 +2030,30 @@ rules:
   - list
   - watch
 - apiGroups:
+  - external-secrets.io
+  resources:
+  - externalsecrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - github.upbound.io
+  resources:
+  - providerconfigs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
   - helm.toolkit.fluxcd.io
   resources:
   - helmreleases
@@ -2041,6 +2090,47 @@ rules:
   - update
   - watch
 - apiGroups:
+  - networking.internal.knative.dev
+  resources:
+  - clusterdomainclaims
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - networks.blanketops.dev
+  resources:
+  - domains
+  - routes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - networks.blanketops.dev
+  resources:
+  - domains/finalizers
+  - routes/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - networks.blanketops.dev
+  resources:
+  - domains/status
+  - routes/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
   - packaging.carvel.dev
   resources:
   - packageinstalls
@@ -2062,6 +2152,31 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - repo.github.upbound.io
+  resources:
+  - repositories
+  - repositorywebhooks
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - serving.knative.dev
+  resources:
+  - domainmappings
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups:
   - shipwright.io
   resources:

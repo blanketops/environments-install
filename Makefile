@@ -109,9 +109,8 @@ diff: check-tools ## Show diff against live cluster
 
 .PHONY: validate
 validate: check-tools ## Validate manifests with server-side dry run
-	# Create both required namespaces
 	$(KUBECTL) create namespace blanketops-environments-api-system --dry-run=client -o yaml | $(KUBECTL) apply -f -
 	$(KUBECTL) create namespace blanketops-environments --dry-run=client -o yaml | $(KUBECTL) apply -f -
-	
-	# Run the dry run
+    # Wait for the namespace to actually exist before continuing
+	$(KUBECTL) wait --for=create namespace/blanketops-environments --timeout=30s
 	$(KUSTOMIZE) build config/default | $(KUBECTL) apply --dry-run=server -f -
