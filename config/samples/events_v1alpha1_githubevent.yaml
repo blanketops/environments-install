@@ -1,0 +1,25 @@
+apiVersion: events.blanketops.dev/v1alpha1
+kind: GitHubEvent
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/version: v0.0.1
+    environments.blanketops.dev/name: environment-sample
+    environments.blanketops.dev/type: dev
+    environments.blanketops.dev/api-version: v0.1.4
+    environments.blanketops.dev/contract-version: v0.4.0
+    environments.blanketops.dev/controller-version: v0.2.5
+    environments.blanketops.dev/operator-version: v0.5.1
+  name: githubevent-for-kaniko-sample
+  namespace: dev
+spec:
+  contract:
+    repository: <repository-owner>/<repository>
+    eventType: push
+    ref: refs/heads/main
+    webhook:
+      secretRef:
+        name: github-webhook-secret # from secretStore
+        key: secret

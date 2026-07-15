@@ -1,0 +1,20 @@
+apiVersion: environments.blanketops.dev/v1alpha1
+kind: Environment
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/version: v0.0.1
+    environments.blanketops.dev/name: environment-sample
+    environments.blanketops.dev/type: dev
+    environments.blanketops.dev/api-version: v0.1.4
+     environments.blanketops.dev/contract-version: v0.4.0
+    environments.blanketops.dev/controller-version: v0.2.5
+    environments.blanketops.dev/operator-version: v0.5.1
+  name: environment-sample
+spec:
+  contract:
+    secretStore:
+      name: blanketops-environments-aws    # | azure | gcp
+      kind: ClusterSecretStore
