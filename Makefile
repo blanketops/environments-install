@@ -98,7 +98,7 @@ undeploy: check-tools ## Remove BlanketOps Environments
 sync-rbac: ## Sync RBAC manifests from the controller repo
 	@echo "Syncing RBAC from blanketops-environments-controller..."
 	@# Replace the path below with the actual relative path to your controller repo
-	cp ../blanketops-environments-controller/config/rbac/role.yaml config/rbac/role.yaml
+	cp ../environments-controller/config/rbac/role.yaml config/rbac/role.yaml
 	@echo "✔ RBAC synced"
 	
 ##@ Verification
