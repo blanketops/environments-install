@@ -6,10 +6,10 @@ metadata:
     app.kubernetes.io/name: blanketops-environments
     app.kubernetes.io/part-of: blanketops
     app.kubernetes.io/version: v0.0.1
-    environments.blanketops.dev/api-version: v0.1.4
-    environments.blanketops.dev/contract-version: v0.4.0
-    environments.blanketops.dev/controller-version: v0.2.5
-    environments.blanketops.dev/operator-version: v0.5.1
+    environments.blanketops.dev/api-version: v0.2.6
+    environments.blanketops.dev/contract-version: v0.4.9
+    environments.blanketops.dev/controller-version: v0.4.0
+    environments.blanketops.dev/operator-version: v0.7.5
     environments.blanketops.dev/type: dev
   name: system
 ---
@@ -23,10 +23,10 @@ metadata:
     app.kubernetes.io/name: blanketops-environments
     app.kubernetes.io/part-of: blanketops
     app.kubernetes.io/version: v0.0.1
-    environments.blanketops.dev/api-version: v0.1.4
-    environments.blanketops.dev/contract-version: v0.4.0
-    environments.blanketops.dev/controller-version: v0.2.5
-    environments.blanketops.dev/operator-version: v0.5.1
+    environments.blanketops.dev/api-version: v0.2.6
+    environments.blanketops.dev/contract-version: v0.4.9
+    environments.blanketops.dev/controller-version: v0.4.0
+    environments.blanketops.dev/operator-version: v0.7.5
     environments.blanketops.dev/type: dev
 spec:
   selector:
@@ -35,10 +35,10 @@ spec:
       app.kubernetes.io/name: blanketops-environments
       app.kubernetes.io/part-of: blanketops
       app.kubernetes.io/version: v0.0.1
-      environments.blanketops.dev/api-version: v0.1.4
-      environments.blanketops.dev/contract-version: v0.1.7
-      environments.blanketops.dev/controller-version: v0.2.3
-      environments.blanketops.dev/operator-version: v0.2.1
+      environments.blanketops.dev/api-version: v0.2.6
+      environments.blanketops.dev/contract-version: v0.4.9
+      environments.blanketops.dev/controller-version: v0.4.0
+      environments.blanketops.dev/operator-version: v0.7.5
       environments.blanketops.dev/type: dev
   replicas: 1
   template:
@@ -50,10 +50,10 @@ spec:
         app.kubernetes.io/name: blanketops-environments
         app.kubernetes.io/part-of: blanketops
         app.kubernetes.io/version: v0.0.1
-        environments.blanketops.dev/api-version: v0.1.4
-        environments.blanketops.dev/contract-version: v0.1.7
-        environments.blanketops.dev/controller-version: v0.2.3
-        environments.blanketops.dev/operator-version: v0.2.1
+        environments.blanketops.dev/api-version: v0.2.6
+        environments.blanketops.dev/contract-version: v0.4.9
+        environments.blanketops.dev/controller-version: v0.4.0
+        environments.blanketops.dev/operator-version: v0.7.5
         environments.blanketops.dev/type: dev
     spec:
       # TODO(user): Uncomment the following code to configure the nodeAffinity expression

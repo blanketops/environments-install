@@ -15,7 +15,6 @@ rules:
   - ""
   resources:
   - secrets
-  - serviceaccounts
   verbs:
   - create
   - delete
@@ -140,14 +139,6 @@ rules:
   - githubevents/status
   verbs:
   - get
-  - patch
-  - update
-- apiGroups:
-  - events.k8s.io
-  resources:
-  - events
-  verbs:
-  - create
   - patch
   - update
 - apiGroups:
