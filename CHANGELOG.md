@@ -1,3 +1,17 @@
+## [0.1.8] - 2026-07-20
+
+### 🐛 Bug Fixes
+
+- Normalize version labels and restore RBAC rule fix
+
+### 💼 Other
+
+- Merge release/v0.1.8 into main
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.1.6
+- Sync develop with main after release/v0.1.6
 ## [0.1.6] - 2026-07-19
 
 ### 💼 Other
