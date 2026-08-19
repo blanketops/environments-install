@@ -1,4 +1,9 @@
-## [0.1.10] - 2026-08-19
+## [unreleased]
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.1.10
+## [0.2.0] - 2026-08-19
 
 ### 💼 Other
 
