@@ -1,3 +1,28 @@
+## [0.1.10] - 2026-08-19
+
+### 💼 Other
+
+- Merge release/v0.1.10 into main
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.1.9
+- Sync develop with main after release/v0.1.9
+- Bump component version annotations to latest releases
+## [0.1.9] - 2026-07-20
+
+### 🐛 Bug Fixes
+
+- Restore serviceaccounts/events.k8s.io RBAC rules
+
+### 💼 Other
+
+- Merge release/v0.1.9 into main
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.1.8
+- Sync develop with main after release/v0.1.8
 ## [0.1.8] - 2026-07-20
 
 ### 🐛 Bug Fixes
