@@ -1,4 +1,3 @@
-
 ## What
 
 <!-- One or two sentences. What does this PR change? -->
@@ -7,37 +6,32 @@
 
 <!-- The intent. Link the issue if one exists: Closes #123 -->
 
-## Domain
+## Area
 
 <!-- Mark all that apply -->
 
-* [ ] `environments`
-* [ ] `events`
-* [ ] `sources`
-* [ ] `networks`
-* [ ] `common`
-* [ ] Application / domain layer (no API surface change)
-* [ ] CI / tooling / docs
+* [ ] CRDs (vendored from `environments-api`)
+* [ ] RBAC (`config/rbac`)
+* [ ] Controller-manager deployment (`config/manager`)
+* [ ] Network policy / Prometheus monitoring
+* [ ] Kustomize overlay (`config/default`)
+* [ ] CI / release tooling / docs
 
-## API impact
+## Version sync
 
-* [ ] No API surface change
-* [ ] `v1alpha1` — free to change
-* [ ] `v1beta1` — backwards-compatible only, deprecations allowed
-* [ ] `v1` — **breaking change** (requires version bump + changelog entry + migration note)
+<!-- This repo vendors CRDs and stamps environments.blanketops.dev/* version labels -- check these are current, not just "some version" -->
 
-<!-- If breaking: what breaks, and what must consumers do? -->
+* [ ] `controller-version` label matches the `environments-controller` release this targets
+* [ ] `contract-version` label matches the `environments-contract` release this targets
+* [ ] `api-version` label matches the `environments-api` release this targets
+* [ ] `operator-version` label matches the `environments` release this targets
+* [ ] CRDs re-vendored from `environments-api` if schemas changed
 
 ## Checklist
 
-* [ ] `mage verify` passes locally
-* [ ] `buf breaking` reviewed (failures justified above if pre-v1)
-* [ ] Panic-free resolution — no `panic()` calls in resolution or domain layers
-* [ ] Import paths use `gen/go/blanketops/...` for contract types
-* [ ] BlanketOps labels present where required (`environments.blanketops.dev/*`)
-* [ ] Conditions written via `core.SetCondition` at each domain pipeline stage
-* [ ] Events emitted via `core.EventRecorder` for terminal outcomes
-* [ ] ESP-0001 updated if contract semantics changed
+* [ ] `make build` renders cleanly (no cluster access required)
+* [ ] `make build-installer` regenerates `dist/install.yaml` and it's committed
+* [ ] `make validate` passes against a real cluster, if touching RBAC or manager manifests
 * [ ] Commit messages follow Conventional Commits
 
 ## Notes for reviewer
