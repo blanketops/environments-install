@@ -1,8 +1,16 @@
-## [unreleased]
+## [0.2.1] - 2026-08-20
+
+### 🐛 Bug Fixes
+
+- Reconcile CRD samples with real proto contracts
 
 ### ⚙️ Miscellaneous Tasks
 
 - *(release)* Update changelog for v0.1.10
+- *(release)* Update changelog for v0.2.0
+- Sync develop with main after release/v0.2.0
+- Add dependabot.yml (github-actions only)
+- Bring dependabot.yml into main (Dependabot reads config from default branch)
 ## [0.2.0] - 2026-08-19
 
 ### 💼 Other
