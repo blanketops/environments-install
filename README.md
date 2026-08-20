@@ -1,11 +1,10 @@
-# Blanketops Environments Install
+# BlanketOps Environments Install
 
 ## Overview
 
-Blanketops Environments Install provides the `declarative` `installation` `manifests` for BlanketOps Environments.
+BlanketOps Environments Install provides the declarative installation manifests for BlanketOps Environments.
 
-This repository is install-only.
-It exists to make installing, upgrading, and removing BlanketOps Environments `boring`, `repeatable`, and `explicit`.
+This repository is install-only. It exists to make installing, upgrading, and removing BlanketOps Environments boring, repeatable, and explicit.
 
 It contains:
 
@@ -29,13 +28,13 @@ This repository is intentionally limited in scope.
 BlanketOps Environments is split into three layers:
 
 ```txt
-blanketops-environments-api
+environments-api
 └─ owns CRD schemas and Go types
 
-blanketops-environments-operator
+environments-controller
 └─ owns controllers and runtime logic
 
-blanketops-environments-install ← this repo
+environments-install ← this repo
 └─ owns installation manifests only
 ```
 
@@ -179,11 +178,7 @@ This is useful for:
 - This repository pins CRD versions and operator image tags
 
 - Releases should align with compatible versions of:
-  - `blanketops-environments-api`
-  - `blanketops-environments-operator`
+  - `environments-api`
+  - `environments-controller`
 
-No code is built here — releases are purely `manifest updates`.
-
-```
-
-```
+No code is built here — releases are purely manifest updates.
