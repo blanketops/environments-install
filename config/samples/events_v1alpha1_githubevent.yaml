@@ -19,7 +19,4 @@ spec:
     repository: <repository-owner>/<repository>
     eventType: push
     ref: refs/heads/main
-    webhook:
-      secretRef:
-        name: github-webhook-secret # from secretStore
-        key: secret
+    webhookSecretRef: github-webhook-secret # from secretStore

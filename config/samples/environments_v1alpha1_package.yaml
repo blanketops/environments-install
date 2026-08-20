@@ -15,24 +15,21 @@ metadata:
   name: package-for-kaniko-sample
 spec:
   contract:
-    name: for-kaniko-app
-    version: v1.0.0
     enabled: true
-    packageName: for-kaniko-app
-    packageVersion: v1.2.3
-    packageDescription: >
+    name: for-kaniko-app
+    version: v1.2.3
+    description: >
       This package contains the API deployment manifests and runtime configuration. #magic___^_^___line
-    packageMaintainers:
+    maintainers:
     - name: Neo
       email: neo@blanketops.online
-    packageRepository:
+    repository:
       url: git@github.com:BlanketOps/for-kaniko-app-packages.git
       credentialsSecret: git-ssh-credentials-packages
-    packageKappDiff: true
-    stateRepo:
+    diffEnabled: true
+    stateRepository:
       url: git@github.com:BlanketOps/for-kaniko-app-state.git
-      ref:
-        branch: master
+      ref: master
       cloneSecret: git-ssh-credentials-state
       strategy: kustomization
       path: ./clusters/dev

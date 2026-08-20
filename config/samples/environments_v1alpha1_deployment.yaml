@@ -15,15 +15,13 @@ metadata:
   name: deployment-for-kaniko-sample
   namespace: dev
 spec:
-   contract:
+  contract:
     serviceUnits:
       - for-kaniko-app-api
       - for-kaniko-app-worker
     runtime: kubernetes.io/container-runtime #currently default and supported, in progress ecs,knative and azure
-    strategy: Rolling
     imageAutomation: false
     reconciliationStrategy: kustomize # default, planning to support helm
-    gitOwner: <repositoryOwner>
     manifestsRepo:
       url: ssh://git@github.com/<repository-owner/<repository>.git
       cloneSecret: git-ssh-credentials # from secretStore

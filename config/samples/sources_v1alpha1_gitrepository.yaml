@@ -16,7 +16,6 @@ metadata:
 spec:
   contract:
     provider: github
-    hookUrl: https://elimination-propecia-meter-strips.trycloudflare.com/
     repository:
       owner: <repository-owner>
       name: <repository-name>
