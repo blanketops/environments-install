@@ -1,3 +1,12 @@
+## [0.2.2] - 2026-08-20
+
+### 📚 Documentation
+
+- Fix wrong repo names and a broken trailing fence in README
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.2.1
 ## [0.2.1] - 2026-08-20
 
 ### 🐛 Bug Fixes
