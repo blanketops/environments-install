@@ -1,3 +1,23 @@
+## [0.2.3] - 2026-08-21
+
+### 🐛 Bug Fixes
+
+- *(templates)* Move issue templates to the path GitHub actually reads
+
+### 💼 Other
+
+- Merge release/v0.2.3 into main
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.2.2
+- *(ci)* Bump actions/checkout from 4 to 7
+- *(ci)* Bump actions/setup-go from 5 to 7
+- *(ci)* Bump softprops/action-gh-release from 2 to 3
+- *(ci)* Bump actions/create-github-app-token from 1 to 3
+- *(ci)* Bump azure/setup-kubectl from 4 to 5
+- Bring issue/PR template fixes into main
+- Bump sibling version labels to latest releases
 ## [0.2.2] - 2026-08-20
 
 ### 📚 Documentation
