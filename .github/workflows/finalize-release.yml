@@ -1,3 +1,12 @@
+# Changelog generation:
+#   release.yml (triggered separately by the tag push below) used to
+#   generate CHANGELOG.md and commit it to main itself -- a race, since it
+#   runs asynchronously and can land on main after this job has already
+#   merged main back into develop, permanently leaving develop without that
+#   commit (confirmed happening on the v0.2.4 release -- develop needed a
+#   manual post-hoc sync). Generating and committing it here instead, after
+#   tagging and before merging back into develop, means develop is always
+#   caught up regardless of release.yml's own timing.
 name: Finalize Release
 on:
   workflow_dispatch:
@@ -42,6 +51,28 @@ jobs:
           git tag ${{ github.event.inputs.version }}
           git push origin ${{ github.event.inputs.version }}
 
+      - name: Install git-cliff
+        run: |
+          GITCLIFF_VERSION="2.13.0"
+          curl -L "https://github.com/orhun/git-cliff/releases/download/v${GITCLIFF_VERSION}/git-cliff-${GITCLIFF_VERSION}-x86_64-unknown-linux-gnu.tar.gz" -o git-cliff.tar.gz
+          tar xzf git-cliff.tar.gz
+          sudo mv "git-cliff-${GITCLIFF_VERSION}/git-cliff" /usr/local/bin/git-cliff
+          rm -rf git-cliff.tar.gz "git-cliff-${GITCLIFF_VERSION}"
+          git-cliff --version
+
+      - name: Generate CHANGELOG.md
+        run: git-cliff --config .cliff.toml --output CHANGELOG.md
+
+      - name: Commit and push changelog
+        run: |
+          git add CHANGELOG.md
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "chore(release): update changelog for ${{ github.event.inputs.version }}"
+            git push origin main
+          else
+            echo "No changelog changes to commit"
+          fi
+
       - name: Merge main back into develop
         run: |
           git checkout develop
@@ -56,15 +87,16 @@ jobs:
       - name: Release Summary
         run: |
           cat >> $GITHUB_STEP_SUMMARY <<EOF
-          # 🎉 Release Finalized **Version:** \`${{ github.event.inputs.version }}\` 
-          ## Completed 
-          - Merged \`release/${{ github.event.inputs.version }}\` into \`main\` 
-          - Created Git tag \`${{ github.event.inputs.version }}\` 
+          # 🎉 Release Finalized **Version:** \`${{ github.event.inputs.version }}\`
+          ## Completed
+          - Merged \`release/${{ github.event.inputs.version }}\` into \`main\`
+          - Created Git tag \`${{ github.event.inputs.version }}\`
+          - Generated and committed CHANGELOG.md
           - Synced \`main\` back into \`develop\`
-          - Deleted release branch 
-          ## Branch Flow 
-          -  release/${{ github.event.inputs.version }} ↓ main ↓ develop 
-          ## Release Tag \`${{ github.event.inputs.version }}\` 
+          - Deleted release branch
+          ## Branch Flow
+          -  release/${{ github.event.inputs.version }} ↓ main ↓ develop
+          ## Release Tag \`${{ github.event.inputs.version }}\`
           ## Next Steps
-          - Pushing the tag triggers the **Release** workflow which generates the changelog and GitHub Release. 
+          - Pushing the tag triggers the **Release** workflow which publishes the GitHub Release with the installer attached.
           EOF
