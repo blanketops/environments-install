@@ -1,3 +1,14 @@
+## [0.2.4] - 2026-08-23
+
+### 💼 Other
+
+- Merge release/v0.2.4 into main
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.2.3
+- Sync develop with main after release/v0.2.3
+- Bump sibling version labels to latest releases
 ## [0.2.3] - 2026-08-21
 
 ### 🐛 Bug Fixes
