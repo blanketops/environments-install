@@ -1,0 +1,106 @@
+# What a Package may deploy.
+#
+# The controller creates a service account for every Package and binds it to
+# this role; kapp-controller applies the Package's repository as that service
+# account. A kind that is not listed here cannot be delivered through a
+# Package.
+#
+# The name, with the installation's name prefix, is a contract with the
+# controller: it binds this role by name, and the manager role may bind this
+# role and no other.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+    app.kubernetes.io/version: v0.0.1
+    environments.blanketops.dev/api-version: v0.2.9
+    environments.blanketops.dev/contract-version: v0.5.4
+    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/operator-version: v0.8.2
+
+  name: package-deployer-role
+rules:
+# kapp records what it applied in ConfigMaps beside the App.
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+# The BlanketOps kinds that make up an environment. Package is left out: a
+# Package does not deliver Packages.
+- apiGroups:
+  - environments.blanketops.dev
+  resources:
+  - builds
+  - deployments
+  - environments
+  - serviceunits
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - events.blanketops.dev
+  resources:
+  - githubevents
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - networks.blanketops.dev
+  resources:
+  - domains
+  - routes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - sources.blanketops.dev
+  resources:
+  - gitrepositories
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+# The secret store an Environment reads its credentials from.
+- apiGroups:
+  - external-secrets.io
+  resources:
+  - clustersecretstores
+  - secretstores
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
