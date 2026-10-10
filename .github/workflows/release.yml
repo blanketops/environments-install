@@ -1,3 +1,9 @@
+# CHANGELOG.md is generated and committed by finalize-release.yml,
+# synchronously, before it merges main back into develop -- doing it there
+# instead of here closes a race where this workflow (triggered
+# asynchronously by the tag push) used to commit the changelog to main
+# after finalize-release.yml had already synced develop, leaving develop
+# permanently missing that commit.
 name: Release
 on:
     push:
@@ -7,7 +13,7 @@ permissions:
     contents: write
 jobs:
     release:
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       steps:
         - name: Checkout tag
           uses: actions/checkout@v7
@@ -32,21 +38,12 @@ jobs:
               echo "CRDs: $(grep -c '^kind: CustomResourceDefinition' dist/install.yaml)"
               ! grep -q 'controller:latest' dist/install.yaml || { echo "ERROR: unpinned image in installer"; exit 1; }
 
+        # finalize-release.yml already generated and committed CHANGELOG.md
+        # to main before tagging -- this just gets onto that tip.
         - name: Checkout main
           run: |
               git checkout main
               git pull origin main
-
-        - name: Generate CHANGELOG.md
-          run: git-cliff --config .cliff.toml --output CHANGELOG.md
-
-        - name: Commit changelog
-          run: |
-              git config user.name "github-actions"
-              git config user.email "actions@github.com"
-              git add CHANGELOG.md
-              git commit -m "chore(release): update changelog for ${{ github.ref_name }}" || echo "No changes"
-              git push origin main
 
         - name: Generate release notes
           run: git-cliff --config .cliff.toml --latest --output RELEASE_NOTES.md
@@ -67,9 +64,7 @@ jobs:
               **Version:** \`${{ github.ref_name }}\`
               ## Completed
               - Built \`dist/install.yaml\` from tag ${{ github.ref_name }}
-              - Generated CHANGELOG.md using git-cliff
-              - Committed changelog updates to main
-              - Generated release notes
+              - Generated release notes from the already-current CHANGELOG.md
               - Published GitHub Release with installer attached
               ## Assets
               - install.yaml ($(du -h dist/install.yaml | cut -f1), $(grep -c '^kind:' dist/install.yaml) resources)

@@ -27,6 +27,7 @@ rules:
 - apiGroups:
   - argoproj.io
   resources:
+  - eventbus
   - eventsources
   - sensors
   verbs:
@@ -281,6 +282,28 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterrolebindings
+  - rolebindings
+  - roles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resourceNames:
+  - blanketops-environments-package-deployer-role
+  resources:
+  - clusterroles
+  verbs:
+  - bind
 - apiGroups:
   - repo.github.upbound.io
   resources:
