@@ -1,3 +1,35 @@
+## [0.2.5] - 2026-10-21
+
+### 🚀 Features
+
+- *(rbac)* Add the role a Package's service account deploys with
+
+### 🐛 Bug Fixes
+
+- Close the release.yml changelog race
+- *(rbac)* Sync manager role for the GitHubEvent provider
+- *(manager)* Select the controller Deployment on stable labels only
+- Use the verbatim Apache-2.0 license text
+
+### 💼 Other
+
+- Merge release/v0.2.5 into main
+
+### ⚙️ Miscellaneous Tasks
+
+- Sync develop with main after release/v0.2.4
+- *(release)* Update changelog for v0.2.4
+- Sync develop with main after release/v0.2.4 changelog
+- *(ci)* Bump actions/upload-artifact from 4 to 7
+- *(release)* Make the workflows' commits verified
+- Run every job on the self-hosted runners
+- *(manager)* Pin controller v0.6.2
+- Do not fail a job when the artifact upload is refused
+- Turn off setup-go's cache on the self-hosted runners
+- *(dependabot)* Open dependency PRs against main
+- Sync develop with main
+- Land bot writes to main through pull requests
+- Sync develop with main
 ## [0.2.4] - 2026-08-23
 
 ### 💼 Other
