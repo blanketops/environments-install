@@ -1,3 +1,13 @@
+## [0.2.6] - 2026-10-21
+
+### 💼 Other
+
+- Merge release/v0.2.6 into main
+
+### ⚙️ Miscellaneous Tasks
+
+- Sync develop with main after release/v0.2.5
+- *(manager)* Pin controller v0.6.5 and update the version labels
 ## [0.2.5] - 2026-10-21
 
 ### 🚀 Features
@@ -30,6 +40,7 @@
 - Sync develop with main
 - Land bot writes to main through pull requests
 - Sync develop with main
+- *(release)* Update changelog for v0.2.5 (#52)
 ## [0.2.4] - 2026-08-23
 
 ### 💼 Other
