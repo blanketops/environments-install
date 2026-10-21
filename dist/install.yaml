@@ -8,7 +8,7 @@ metadata:
     control-plane: controller-manager
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
     environments.blanketops.dev/type: dev
   name: blanketops-environments
@@ -1338,7 +1338,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-controller-manager
   namespace: blanketops-environments
@@ -1352,7 +1352,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-leader-election-role
   namespace: blanketops-environments
@@ -1398,7 +1398,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-build-admin-role
 rules:
@@ -1424,7 +1424,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-build-editor-role
 rules:
@@ -1456,7 +1456,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-build-viewer-role
 rules:
@@ -1484,7 +1484,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-deployment-admin-role
 rules:
@@ -1510,7 +1510,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-deployment-editor-role
 rules:
@@ -1542,7 +1542,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-deployment-viewer-role
 rules:
@@ -1570,7 +1570,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-environment-admin-role
 rules:
@@ -1596,7 +1596,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-environment-editor-role
 rules:
@@ -1628,7 +1628,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-environment-viewer-role
 rules:
@@ -1656,7 +1656,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-package-admin-role
 rules:
@@ -1682,7 +1682,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-package-editor-role
 rules:
@@ -1714,7 +1714,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-package-viewer-role
 rules:
@@ -1742,7 +1742,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-serviceunit-admin-role
 rules:
@@ -1768,7 +1768,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-serviceunit-editor-role
 rules:
@@ -1800,7 +1800,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-environments-serviceunit-viewer-role
 rules:
@@ -1828,7 +1828,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-events-githubevent-editor-role
 rules:
@@ -1860,7 +1860,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-events-githubevent-viewer-role
 rules:
@@ -2165,6 +2165,7 @@ rules:
 - apiGroups:
   - rbac.authorization.k8s.io
   resources:
+  - clusterrolebindings
   - rolebindings
   - roles
   verbs:
@@ -2175,6 +2176,14 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resourceNames:
+  - blanketops-environments-package-deployer-role
+  resources:
+  - clusterroles
+  verbs:
+  - bind
 - apiGroups:
   - repo.github.upbound.io
   resources:
@@ -2325,7 +2334,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-networks-domain-admin-role
 rules:
@@ -2351,7 +2360,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-networks-domain-editor-role
 rules:
@@ -2383,7 +2392,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-networks-domain-viewer-role
 rules:
@@ -2411,7 +2420,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-networks-route-admin-role
 rules:
@@ -2437,7 +2446,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-networks-route-editor-role
 rules:
@@ -2469,7 +2478,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-networks-route-viewer-role
 rules:
@@ -2497,7 +2506,98 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
+    environments.blanketops.dev/operator-version: v0.8.2
+  name: blanketops-environments-package-deployer-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - environments.blanketops.dev
+  resources:
+  - builds
+  - deployments
+  - environments
+  - serviceunits
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - events.blanketops.dev
+  resources:
+  - githubevents
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - networks.blanketops.dev
+  resources:
+  - domains
+  - routes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - sources.blanketops.dev
+  resources:
+  - gitrepositories
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - external-secrets.io
+  resources:
+  - clustersecretstores
+  - secretstores
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+    app.kubernetes.io/version: v0.0.1
+    environments.blanketops.dev/api-version: v0.2.9
+    environments.blanketops.dev/contract-version: v0.5.4
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-results-environmentresult-admin-role
 rules:
@@ -2523,7 +2623,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-results-environmentresult-editor-role
 rules:
@@ -2555,7 +2655,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-results-environmentresult-viewer-role
 rules:
@@ -2583,7 +2683,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-sources-gitrepository-admin-role
 rules:
@@ -2609,7 +2709,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-sources-gitrepository-editor-role
 rules:
@@ -2641,7 +2741,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-sources-gitrepository-viewer-role
 rules:
@@ -2669,7 +2769,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-leader-election-rolebinding
   namespace: blanketops-environments
@@ -2691,7 +2791,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
   name: blanketops-environments-manager-rolebinding
 roleRef:
@@ -2727,7 +2827,7 @@ metadata:
     control-plane: controller-manager
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/name: environment-sample
     environments.blanketops.dev/operator-version: v0.8.2
     environments.blanketops.dev/type: dev
@@ -2753,7 +2853,7 @@ metadata:
     control-plane: controller-manager
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
     environments.blanketops.dev/type: dev
   name: blanketops-environments-controller-manager
@@ -2763,14 +2863,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: blanketops-environments
-      app.kubernetes.io/part-of: blanketops
-      app.kubernetes.io/version: v0.0.1
       control-plane: controller-manager
-      environments.blanketops.dev/api-version: v0.2.9
-      environments.blanketops.dev/contract-version: v0.5.4
-      environments.blanketops.dev/controller-version: v0.6.1
-      environments.blanketops.dev/operator-version: v0.8.2
-      environments.blanketops.dev/type: dev
   template:
     metadata:
       annotations:
@@ -2782,7 +2875,7 @@ spec:
         control-plane: controller-manager
         environments.blanketops.dev/api-version: v0.2.9
         environments.blanketops.dev/contract-version: v0.5.4
-        environments.blanketops.dev/controller-version: v0.6.1
+        environments.blanketops.dev/controller-version: v0.6.2
         environments.blanketops.dev/operator-version: v0.8.2
         environments.blanketops.dev/type: dev
     spec:
@@ -2815,7 +2908,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        image: ghcr.io/blanketops/environments-controller:v0.4.1
+        image: ghcr.io/blanketops/environments-controller:v0.6.2
         livenessProbe:
           httpGet:
             path: /healthz
@@ -2863,7 +2956,7 @@ metadata:
     control-plane: controller-manager
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
     environments.blanketops.dev/type: dev
   name: blanketops-environments-allow-metrics-traffic

@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
     environments.blanketops.dev/type: dev
   name: system
@@ -25,21 +25,17 @@ metadata:
     app.kubernetes.io/version: v0.0.1
     environments.blanketops.dev/api-version: v0.2.9
     environments.blanketops.dev/contract-version: v0.5.4
-    environments.blanketops.dev/controller-version: v0.6.1
+    environments.blanketops.dev/controller-version: v0.6.2
     environments.blanketops.dev/operator-version: v0.8.2
     environments.blanketops.dev/type: dev
 spec:
+  # Only labels that never change: the selector is immutable, so a version
+  # label here makes every version bump fail with "field is immutable".
+  # The version labels stay on the pod template below.
   selector:
     matchLabels:
       control-plane: controller-manager
       app.kubernetes.io/name: blanketops-environments
-      app.kubernetes.io/part-of: blanketops
-      app.kubernetes.io/version: v0.0.1
-      environments.blanketops.dev/api-version: v0.2.9
-      environments.blanketops.dev/contract-version: v0.5.4
-      environments.blanketops.dev/controller-version: v0.6.1
-      environments.blanketops.dev/operator-version: v0.8.2
-      environments.blanketops.dev/type: dev
   replicas: 1
   template:
     metadata:
@@ -52,7 +48,7 @@ spec:
         app.kubernetes.io/version: v0.0.1
         environments.blanketops.dev/api-version: v0.2.9
         environments.blanketops.dev/contract-version: v0.5.4
-        environments.blanketops.dev/controller-version: v0.6.1
+        environments.blanketops.dev/controller-version: v0.6.2
         environments.blanketops.dev/operator-version: v0.8.2
         environments.blanketops.dev/type: dev
     spec:
