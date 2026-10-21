@@ -1,12 +1,13 @@
 # Automated dependency updates. GitHub Actions only -- this repo is
 # kustomize YAML manifests (no go.mod, no package.json), so github-actions
 # (workflow action version pins) is the only ecosystem that applies here.
-# PRs target develop, matching every other PR in this repo's branch flow.
+# PRs target main, so dependency updates land on main directly; develop
+# takes them in the next sync from main.
 version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    target-branch: "develop"
+    target-branch: "main"
     schedule:
       interval: "weekly"
       day: "monday"
