@@ -13,6 +13,7 @@ metadata:
     environments.blanketops.dev/controller-version: v0.6.5
     environments.blanketops.dev/operator-version: v0.8.7
   name: serviceunit-for-kaniko-web-sample
+namespace: dev
 spec:
   contract:
     type: static
@@ -37,6 +38,7 @@ metadata:
     environments.blanketops.dev/controller-version: v0.6.5
     environments.blanketops.dev/operator-version: v0.8.7
   name: serviceunit-for-kaniko-worker-sample
+namespace: dev
 spec:
   contract:
     type: build

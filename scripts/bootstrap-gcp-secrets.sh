@@ -23,52 +23,52 @@ echo ""
 
 # ── Git SSH ──────────────────────────────────────────────────
 
-echo "Creating blanketops_git_ssh-privatekey..."
+echo "Creating blanketops_environments_git_ssh-privatekey..."
 echo -n "$(cat ~/.ssh/id_ed25519)" | \
-  gcloud secrets create blanketops_git_ssh-privatekey \
+  gcloud secrets create blanketops_environments_git_ssh-privatekey \
   --data-file=- \
   --project="$PROJECT_ID"
 
-echo "Creating blanketops_git_ssh-publickey..."
+echo "Creating blanketops_environments_git_ssh-publickey..."
 echo -n "$(cat ~/.ssh/id_ed25519.pub)" | \
-  gcloud secrets create blanketops_git_ssh-publickey \
+  gcloud secrets create blanketops_environments_git_ssh-publickey \
   --data-file=- \
   --project="$PROJECT_ID"
 
-echo "Creating blanketops_git_known-hosts..."
+echo "Creating blanketops_environments_git_known-hosts..."
 ssh-keyscan github.com 2>/dev/null | \
-  gcloud secrets create blanketops_git_known-hosts \
+  gcloud secrets create blanketops_environments_git_known-hosts \
   --data-file=- \
   --project="$PROJECT_ID"
 
 # ── Registry ─────────────────────────────────────────────────
 
-echo "Creating blanketops_registry_config..."
+echo "Creating blanketops_environments_registry_config..."
 DOCKER_AUTH=$(echo -n "<USERNAME>:<TOKEN>" | base64)
 echo -n "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"$DOCKER_AUTH\"}}}" | \
-  gcloud secrets create blanketops_registry_config \
+  gcloud secrets create blanketops_environments_registry_config \
   --data-file=- \
   --project="$PROJECT_ID"
 
 # ── GitHub ───────────────────────────────────────────────────
 
-echo "Creating blanketops_github_webhook_secret..."
+echo "Creating blanketops_environments_github_webhook_secret..."
 echo -n "<REPLACE_WITH_WEBHOOK_SECRET>" | \
-  gcloud secrets create blanketops_github_webhook_secret \
+  gcloud secrets create blanketops_environments_github_webhook_secret \
   --data-file=- \
   --project="$PROJECT_ID"
 
-echo "Creating blanketops_github_api_token..."
+echo "Creating blanketops_environments_github_api_token..."
 echo -n "<REPLACE_WITH_GITHUB_TOKEN>" | \
-  gcloud secrets create blanketops_github_api_token \
+  gcloud secrets create blanketops_environments_github_api_token \
   --data-file=- \
   --project="$PROJECT_ID"
 
 # ── Crossplane ───────────────────────────────────────────────
 
-echo "Creating blanketops_crossplane_github_token..."
+echo "Creating blanketops_environments_crossplane_github_token..."
 echo -n "<REPLACE_WITH_CROSSPLANE_GITHUB_TOKEN>" | \
-  gcloud secrets create blanketops_crossplane_github_token \
+  gcloud secrets create blanketops_environments_crossplane_github_token \
   --data-file=- \
   --project="$PROJECT_ID"
 
