@@ -14,14 +14,41 @@ spec:
     singular: deployment
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The execution phase of the overall rollout
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The backend workload runtime being used
+      jsonPath: .status.contract.runtime
+      name: Runtime
+      type: string
+    - description: Workload deployment strategy
+      jsonPath: .status.contract.strategy
+      name: Strategy
+      type: string
+    - description: The target folder path inside the GitOps repo
+      jsonPath: .spec.contract.manifestsRepo.path
+      name: GitOps-Path
+      priority: 1
+      type: string
+    - description: Human readable diagnostics details
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the deployment status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Deployment owns the lifecycle of a deployment operation, including manifest generation, GitOps repo commit, and cluster rollout.
           Deployment represents a declarative request to Deployment an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Deployment contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Deployment contract.
         properties:
           apiVersion:
             description: |-
@@ -43,7 +70,7 @@ spec:
           spec:
             description: |-
               DeploymentSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Deployment contract.
+              BlanketOps Environments Deployment contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -57,7 +84,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Deployment specification.
+                  Contract is the canonical BlanketOps Environments Deployment specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -133,7 +160,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Deployment status.
+                  Contract is the canonical BlanketOps Environments Deployment status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -142,5 +169,4 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}

@@ -13,8 +13,8 @@ metadata:
     environments.blanketops.dev/controller-version: v0.6.5
     environments.blanketops.dev/operator-version: v0.8.7
   name: environment-sample
+  namespace: dev
 spec:
-  contract:
-    secretStore:
-      name: blanketops-environments-aws    # | azure | gcp
-      kind: ClusterSecretStore
+  secretStore:
+    name: vault-backend # | azure | gcp
+    kind: SecretStore
