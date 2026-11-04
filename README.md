@@ -36,5 +36,10 @@ This is useful for:
 - Releases should align with compatible versions of:
   - `environments-api`
   - `environments-controller`
+---
 
+## License
+
+Apache License 2.0 — see [LICENSE](LICENSE) for details.
 No code is built here — releases are purely manifest updates.
+
