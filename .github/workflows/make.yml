@@ -1,3 +1,16 @@
+# =============================================================================
+# make.yml — Build the Operator Installer
+#
+# Builds the BlanketOps Environments operator installer via `make build` and
+# `make build-installer`, then uploads the resulting `dist/install.yaml` as a
+# workflow artifact. Runs on pushes to develop/release and on pull requests
+# targeting those branches.
+#
+# Trigger scope:
+#   push to develop/release; pull_request to develop/release
+#
+# Secrets required: none
+# =============================================================================
 name: Make
 on:
   push:

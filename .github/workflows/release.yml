@@ -4,6 +4,21 @@
 # asynchronously by the tag push) used to commit the changelog to main
 # after finalize-release.yml had already synced develop, leaving develop
 # permanently missing that commit.
+# =============================================================================
+# release.yml — Publish GitHub Release with Installer
+#
+# Fires on push of a v* tag (finalize-release.yml creates it). Builds the
+# installer via `make build-installer`, verifies it, reads the already-current
+# CHANGELOG.md for release notes, and publishes a GitHub Release with the
+# installer attached.
+#
+# Trigger scope:
+#   push tags matching v*
+#
+# Secrets required:
+#   GITHUB_TOKEN — via actions/create-github-app-token for checkout/release
+#   RELEASER_APP_ID, RELEASER_APP_PRIVATE_KEY — the Releaser App
+# =============================================================================
 name: Release
 on:
     push:
