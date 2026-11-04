@@ -31,8 +31,8 @@ This is useful for:
 
 ## Versioning & Releases
 
-- This repository pins CRD versions and operator image tags
-
+- This repository pins CRD versions and operator image tags.
+- No code is built here — releases are purely manifest updates.
 - Releases should align with compatible versions of:
   - `environments-api`
   - `environments-controller`
@@ -41,5 +41,3 @@ This is useful for:
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE) for details.
-No code is built here — releases are purely manifest updates.
-
