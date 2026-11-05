@@ -4,10 +4,6 @@
 
 BlanketOps Environments Install provides the declarative installation manifests for BlanketOps Environments.
 
-
-⚠️ CRDs in this repo are artifacts, not sources of truth.
-They are generated and versioned in the API repository, then vendored here.
-
 ---
 
 ## Tooling Requirements
