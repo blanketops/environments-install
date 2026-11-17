@@ -14,14 +14,45 @@ spec:
     singular: package
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The current reconciliation phase of the package
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The logical name of the packaged application
+      jsonPath: .spec.contract.name
+      name: Package-Name
+      type: string
+    - description: The version identifier of the package contents
+      jsonPath: .spec.contract.version
+      name: Version
+      type: string
+    - description: Whether this package is actively reconciling
+      jsonPath: .spec.contract.enabled
+      name: Enabled
+      type: boolean
+    - description: Whether the last sync resulted in changes
+      jsonPath: .status.contract.diffApplied
+      name: Diff-Applied
+      priority: 1
+      type: boolean
+    - description: Reconciliation failure or diagnostics summary
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the package status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Package represents a versioned delivery artifact tracking manifest state.
           Package represents a declarative request to Package an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Package contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Package contract.
         properties:
           apiVersion:
             description: |-
@@ -43,7 +74,7 @@ spec:
           spec:
             description: |-
               PackageSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Package contract.
+              BlanketOps Environment Package contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -57,7 +88,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Package specification.
+                  Contract is the canonical BlanketOps Environments Package specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -133,7 +164,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Package status.
+                  Contract is the canonical BlanketOps Environments Package status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -142,5 +173,4 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}

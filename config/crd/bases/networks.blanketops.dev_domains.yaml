@@ -14,14 +14,45 @@ spec:
     singular: domain
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The overall lifecycle phase of the domain mapping
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The fully qualified domain name target
+      jsonPath: .spec.contract.host
+      name: Host
+      type: string
+    - description: Provisioning path path (platform vs custom)
+      jsonPath: .spec.contract.tlsStrategy
+      name: Strategy
+      type: string
+    - description: True if a valid TLS certificate exists for this host
+      jsonPath: .status.contract.certIssued
+      name: Cert-Issued
+      type: boolean
+    - description: True if inter-service proxy sidecar validation is forced
+      jsonPath: .spec.contract.mtls.enforced
+      name: mTLS
+      priority: 1
+      type: boolean
+    - description: Human readable diagnostics detail text string
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the Domain status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Domain owns the mapping and cert issuing lifecycle for an application host.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Domain contract.
           Domain represents a declarative request to Domain an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Domain contract.
         properties:
           apiVersion:
             description: |-
@@ -142,5 +173,4 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}

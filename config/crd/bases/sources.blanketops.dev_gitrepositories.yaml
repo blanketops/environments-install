@@ -14,14 +14,40 @@ spec:
     singular: gitrepository
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: True if provider webhooks are registered and active
+      jsonPath: .status.contract.ready
+      name: Ready
+      type: boolean
+    - description: The code hosting platform (e.g., GITHUB, GITLAB)
+      jsonPath: .spec.contract.provider
+      name: Provider
+      type: string
+    - description: The target repository identifier
+      jsonPath: .spec.contract.repository.name
+      name: Repository
+      type: string
+    - description: The user or organization account on the provider
+      jsonPath: .spec.contract.repository.owner
+      name: Owner
+      type: string
+    - description: Deregistration or connection failure summary detail
+      jsonPath: .status.contract.reason
+      name: Reason
+      priority: 1
+      type: string
+    - description: The last time the GitRepository status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          GitRepository declares an external source system observed by the delivery controller.
           GitRepository represents a declarative request to GitRepository an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps GitRepository contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Environments GitRepository contract.
         properties:
           apiVersion:
             description: |-
@@ -43,7 +69,7 @@ spec:
           spec:
             description: |-
               GitRepositorySpec is a Kubernetes-native envelope around the canonical
-              BlanketOps GitRepository contract.
+              BlanketOps Environments Environments GitRepository contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -57,7 +83,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps GitRepository specification.
+                  Contract is the canonical BlanketOps Environments Environments GitRepository specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -68,6 +94,10 @@ spec:
             type: object
           status:
             description: |-
+              ─────────────────────────────────────────────────────────────
+              GitRepository Status (Kubernetes-facing envelope)
+              ─────────────────────────────────────────────────────────────
+
               GitRepositoryStatus represents observed state owned by the controller.
 
               This mirrors the contract status but remains opaque to Kubernetes.
@@ -133,7 +163,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps GitRepository status.
+                  Contract is the canonical BlanketOps Environments Environments GitRepository status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -142,5 +172,4 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}

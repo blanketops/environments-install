@@ -14,14 +14,41 @@ spec:
     singular: build
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: Current lifecycle phase of the build
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: Shipwright strategy used
+      jsonPath: .spec.contract.strategy.name
+      name: Strategy
+      type: string
+    - description: Target repository and tag
+      jsonPath: .spec.contract.image
+      name: Target-Image
+      type: string
+    - description: Active Shipwright BuildRun reference
+      jsonPath: .status.contract.executionRef
+      name: Execution-Ref
+      priority: 1
+      type: string
+    - description: Git commit, branch or tag
+      jsonPath: .spec.contract.source.revision
+      name: Revision
+      priority: 1
+      type: string
+    - description: The last time the build status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Build owns the lifecycle of a build operation, including source retrieval, image building, and artifact publishing.
           Build represents a declarative request to build an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Build contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Build contract.
         properties:
           apiVersion:
             description: |-
@@ -43,7 +70,7 @@ spec:
           spec:
             description: |-
               BuildSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Build contract.
+              BlanketOps Environments Build contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -57,7 +84,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Build specification.
+                  Contract is the canonical BlanketOps Environments Build specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -133,7 +160,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Build status.
+                  Contract is the canonical BlanketOps Environments Build status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -142,5 +169,4 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}

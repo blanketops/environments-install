@@ -14,14 +14,45 @@ spec:
     singular: serviceunit
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The current deployment phase of the workload
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The image sourcing strategy (STATIC or BUILD)
+      jsonPath: .spec.contract.type
+      name: Type
+      type: string
+    - description: The desired target replica count
+      jsonPath: .spec.contract.size
+      name: Replicas
+      type: integer
+    - description: The active image reference used at runtime
+      jsonPath: .status.contract.resolvedImage
+      name: Resolved-Image
+      type: string
+    - description: The materialized backend runtime container
+      jsonPath: .status.contract.runtime
+      name: Runtime
+      priority: 1
+      type: string
+    - description: Aggregated failure diagnostics details
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the service unit status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
-          ServiceUnit represents a declarative request to ServiceUnit an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps ServiceUnit contract.
+          ServiceUnit represents a single declarative deployable workload layout.
+          ServiceUnit represents a declarative request to serviceunit an artifact.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps  Environments ServiceUnit contract.
         properties:
           apiVersion:
             description: |-
@@ -43,7 +74,7 @@ spec:
           spec:
             description: |-
               ServiceUnitSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps ServiceUnit contract.
+              BlanketOps Environments ServiceUnit contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -57,7 +88,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps ServiceUnit specification.
+                  Contract is the canonical BlanketOps Environments ServiceUnit specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -133,7 +164,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps ServiceUnit status.
+                  Contract is the canonical BlanketOps Environments ServiceUnit status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -142,5 +173,4 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}

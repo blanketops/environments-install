@@ -14,14 +14,49 @@ spec:
     singular: route
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The operational lifecycle phase of the network path
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The target domain address to match
+      jsonPath: .spec.contract.host
+      name: Host
+      type: string
+    - description: The HTTP path prefix endpoint rule matching string
+      jsonPath: .spec.contract.path
+      name: Path
+      type: string
+    - description: The underlying target service unit CR being exposed
+      jsonPath: .spec.contract.serviceUnitRef.name
+      name: Service-Unit
+      type: string
+    - description: Whether this network trajectory rule is actively serving traffic
+      jsonPath: .spec.contract.enabled
+      name: Enabled
+      type: boolean
+    - description: The load balancer host target address string output
+      jsonPath: .status.contract.resolvedAddress
+      name: Endpoint
+      priority: 1
+      type: string
+    - description: Failure diagnosis log description detailed summary
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the Route status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Route declares an application ingress trajectory mapping pattern ruleset.
           Route represents a declarative request to Route an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Route contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Route contract.
         properties:
           apiVersion:
             description: |-
@@ -43,7 +78,7 @@ spec:
           spec:
             description: |-
               RouteSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Route contract.
+              BlanketOps Environments Route contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -57,7 +92,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Route specification.
+                  Contract is the canonical BlanketOps Environments Route specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -133,7 +168,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Route status.
+                  Contract is the canonical BlanketOps Environments Route status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -142,5 +177,4 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
