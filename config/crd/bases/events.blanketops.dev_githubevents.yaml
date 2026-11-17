@@ -14,14 +14,50 @@ spec:
     singular: githubevent
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The provider event action (e.g., PUSH, PULL_REQUEST)
+      jsonPath: .spec.contract.eventType
+      name: Event-Type
+      type: string
+    - description: The source repository origin owner/name
+      jsonPath: .spec.contract.repository
+      name: Repository
+      type: string
+    - description: True if webhook signature validation passed
+      jsonPath: .status.contract.accepted
+      name: Accepted
+      type: boolean
+    - description: True if an automation build trigger kicked off
+      jsonPath: .status.contract.triggered
+      name: Triggered
+      type: boolean
+    - description: The target commit hex identifier
+      jsonPath: .spec.contract.commitSha
+      name: Commit-SHA
+      priority: 1
+      type: string
+    - description: Reference to the downstream resource invoked
+      jsonPath: .status.contract.triggeredRef
+      name: Triggered-Ref
+      priority: 1
+      type: string
+    - description: Rejection or execution bypass message detail
+      jsonPath: .status.contract.reason
+      name: Reason
+      priority: 1
+      type: string
+    - description: The last time the GitHubEvent status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          GitHubEvent represents an immutable log of an external Git platform action.
           GitHubEvent represents a declarative request to GitHubEvent an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps GitHubEvent contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments GitHubEvent contract.
         properties:
           apiVersion:
             description: |-
@@ -43,7 +79,7 @@ spec:
           spec:
             description: |-
               GitHubEventSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps GitHubEvent contract.
+              BlanketOps Environments GitHubEvent contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -57,7 +93,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps GitHubEvent specification.
+                  Contract is the canonical BlanketOps Environments GitHubEvent specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -133,7 +169,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps GitHubEvent status.
+                  Contract is the canonical BlanketOps Environments GitHubEvent status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -142,5 +178,4 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
