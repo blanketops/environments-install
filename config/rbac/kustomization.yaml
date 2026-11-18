@@ -7,6 +7,20 @@ resources:
 - service_account.yaml
 - role.yaml
 - role_binding.yaml
+# One ClusterRole per controller package, generated in
+# environments-controller (mage Manifests) and synced here by the admin bot.
+# Together they grant exactly what role.yaml (manager-role) grants; role.yaml
+# and its binding go once these are verified on a cluster.
+- environments_manager_role.yaml
+- environments_manager_role_binding.yaml
+- events_manager_role.yaml
+- events_manager_role_binding.yaml
+- networks_manager_role.yaml
+- networks_manager_role_binding.yaml
+- observers_manager_role.yaml
+- observers_manager_role_binding.yaml
+- sources_manager_role.yaml
+- sources_manager_role_binding.yaml
 - leader_election_role.yaml
 - leader_election_role_binding.yaml
 # What a Package's service account may deploy. The controller binds each
