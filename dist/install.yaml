@@ -28,14 +28,41 @@ spec:
     singular: build
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: Current lifecycle phase of the build
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: Shipwright strategy used
+      jsonPath: .spec.contract.strategy.name
+      name: Strategy
+      type: string
+    - description: Target repository and tag
+      jsonPath: .spec.contract.image
+      name: Target-Image
+      type: string
+    - description: Active Shipwright BuildRun reference
+      jsonPath: .status.contract.executionRef
+      name: Execution-Ref
+      priority: 1
+      type: string
+    - description: Git commit, branch or tag
+      jsonPath: .spec.contract.source.revision
+      name: Revision
+      priority: 1
+      type: string
+    - description: The last time the build status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Build owns the lifecycle of a build operation, including source retrieval, image building, and artifact publishing.
           Build represents a declarative request to build an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Build contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Build contract.
         properties:
           apiVersion:
             description: |-
@@ -57,7 +84,7 @@ spec:
           spec:
             description: |-
               BuildSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Build contract.
+              BlanketOps Environments Build contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -71,7 +98,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Build specification.
+                  Contract is the canonical BlanketOps Environments Build specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -147,7 +174,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Build status.
+                  Contract is the canonical BlanketOps Environments Build status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -156,8 +183,7 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -174,14 +200,41 @@ spec:
     singular: deployment
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The execution phase of the overall rollout
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The backend workload runtime being used
+      jsonPath: .status.contract.runtime
+      name: Runtime
+      type: string
+    - description: Workload deployment strategy
+      jsonPath: .status.contract.strategy
+      name: Strategy
+      type: string
+    - description: The target folder path inside the GitOps repo
+      jsonPath: .spec.contract.manifestsRepo.path
+      name: GitOps-Path
+      priority: 1
+      type: string
+    - description: Human readable diagnostics details
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the deployment status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Deployment owns the lifecycle of a deployment operation, including manifest generation, GitOps repo commit, and cluster rollout.
           Deployment represents a declarative request to Deployment an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Deployment contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Deployment contract.
         properties:
           apiVersion:
             description: |-
@@ -203,7 +256,7 @@ spec:
           spec:
             description: |-
               DeploymentSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Deployment contract.
+              BlanketOps Environments Deployment contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -217,7 +270,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Deployment specification.
+                  Contract is the canonical BlanketOps Environments Deployment specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -293,7 +346,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Deployment status.
+                  Contract is the canonical BlanketOps Environments Deployment status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -302,8 +355,7 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -320,14 +372,45 @@ spec:
     singular: domain
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The overall lifecycle phase of the domain mapping
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The fully qualified domain name target
+      jsonPath: .spec.contract.host
+      name: Host
+      type: string
+    - description: Provisioning path path (platform vs custom)
+      jsonPath: .spec.contract.tlsStrategy
+      name: Strategy
+      type: string
+    - description: True if a valid TLS certificate exists for this host
+      jsonPath: .status.contract.certIssued
+      name: Cert-Issued
+      type: boolean
+    - description: True if inter-service proxy sidecar validation is forced
+      jsonPath: .spec.contract.mtls.enforced
+      name: mTLS
+      priority: 1
+      type: boolean
+    - description: Human readable diagnostics detail text string
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the Domain status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Domain owns the mapping and cert issuing lifecycle for an application host.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Domain contract.
           Domain represents a declarative request to Domain an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Domain contract.
         properties:
           apiVersion:
             description: |-
@@ -448,8 +531,7 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -466,14 +548,45 @@ spec:
     singular: environment
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The aggregate health phase of the delivery chain
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The human-readable application identifier
+      jsonPath: .spec.contract.applicationName
+      name: Application
+      type: string
+    - description: Classification of the environment (e.g., Staging, Production)
+      jsonPath: .spec.contract.environmentType
+      name: Type
+      type: string
+    - description: The current semantic version deployed
+      jsonPath: .spec.contract.version
+      name: Version
+      type: string
+    - description: The source Git branch tracked by this environment
+      jsonPath: .spec.contract.branch
+      name: Branch
+      priority: 1
+      type: string
+    - description: Aggregated failure diagnostics summary
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the environment status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Environment tracks a versioned, isolated execution context where applications run.
           Environment represents a declarative request to Environment an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Environment contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Environment contract.
         properties:
           apiVersion:
             description: |-
@@ -495,7 +608,7 @@ spec:
           spec:
             description: |-
               EnvironmentSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Environment contract.
+              BlanketOps Environments Environment contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -509,7 +622,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Environment specification.
+                  Contract is the canonical BlanketOps Environments Environment specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -585,7 +698,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Environment status.
+                  Contract is the canonical BlanketOps Environments Environment status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -594,8 +707,7 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -612,14 +724,50 @@ spec:
     singular: githubevent
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The provider event action (e.g., PUSH, PULL_REQUEST)
+      jsonPath: .spec.contract.eventType
+      name: Event-Type
+      type: string
+    - description: The source repository origin owner/name
+      jsonPath: .spec.contract.repository
+      name: Repository
+      type: string
+    - description: True if webhook signature validation passed
+      jsonPath: .status.contract.accepted
+      name: Accepted
+      type: boolean
+    - description: True if an automation build trigger kicked off
+      jsonPath: .status.contract.triggered
+      name: Triggered
+      type: boolean
+    - description: The target commit hex identifier
+      jsonPath: .spec.contract.commitSha
+      name: Commit-SHA
+      priority: 1
+      type: string
+    - description: Reference to the downstream resource invoked
+      jsonPath: .status.contract.triggeredRef
+      name: Triggered-Ref
+      priority: 1
+      type: string
+    - description: Rejection or execution bypass message detail
+      jsonPath: .status.contract.reason
+      name: Reason
+      priority: 1
+      type: string
+    - description: The last time the GitHubEvent status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          GitHubEvent represents an immutable log of an external Git platform action.
           GitHubEvent represents a declarative request to GitHubEvent an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps GitHubEvent contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments GitHubEvent contract.
         properties:
           apiVersion:
             description: |-
@@ -641,7 +789,7 @@ spec:
           spec:
             description: |-
               GitHubEventSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps GitHubEvent contract.
+              BlanketOps Environments GitHubEvent contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -655,7 +803,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps GitHubEvent specification.
+                  Contract is the canonical BlanketOps Environments GitHubEvent specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -731,7 +879,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps GitHubEvent status.
+                  Contract is the canonical BlanketOps Environments GitHubEvent status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -740,8 +888,7 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -758,14 +905,40 @@ spec:
     singular: gitrepository
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: True if provider webhooks are registered and active
+      jsonPath: .status.contract.ready
+      name: Ready
+      type: boolean
+    - description: The code hosting platform (e.g., GITHUB, GITLAB)
+      jsonPath: .spec.contract.provider
+      name: Provider
+      type: string
+    - description: The target repository identifier
+      jsonPath: .spec.contract.repository.name
+      name: Repository
+      type: string
+    - description: The user or organization account on the provider
+      jsonPath: .spec.contract.repository.owner
+      name: Owner
+      type: string
+    - description: Deregistration or connection failure summary detail
+      jsonPath: .status.contract.reason
+      name: Reason
+      priority: 1
+      type: string
+    - description: The last time the GitRepository status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          GitRepository declares an external source system observed by the delivery controller.
           GitRepository represents a declarative request to GitRepository an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps GitRepository contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Environments GitRepository contract.
         properties:
           apiVersion:
             description: |-
@@ -787,7 +960,7 @@ spec:
           spec:
             description: |-
               GitRepositorySpec is a Kubernetes-native envelope around the canonical
-              BlanketOps GitRepository contract.
+              BlanketOps Environments Environments GitRepository contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -801,7 +974,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps GitRepository specification.
+                  Contract is the canonical BlanketOps Environments Environments GitRepository specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -812,6 +985,10 @@ spec:
             type: object
           status:
             description: |-
+              ─────────────────────────────────────────────────────────────
+              GitRepository Status (Kubernetes-facing envelope)
+              ─────────────────────────────────────────────────────────────
+
               GitRepositoryStatus represents observed state owned by the controller.
 
               This mirrors the contract status but remains opaque to Kubernetes.
@@ -877,7 +1054,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps GitRepository status.
+                  Contract is the canonical BlanketOps Environments Environments GitRepository status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -886,8 +1063,7 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -904,14 +1080,45 @@ spec:
     singular: package
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The current reconciliation phase of the package
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The logical name of the packaged application
+      jsonPath: .spec.contract.name
+      name: Package-Name
+      type: string
+    - description: The version identifier of the package contents
+      jsonPath: .spec.contract.version
+      name: Version
+      type: string
+    - description: Whether this package is actively reconciling
+      jsonPath: .spec.contract.enabled
+      name: Enabled
+      type: boolean
+    - description: Whether the last sync resulted in changes
+      jsonPath: .status.contract.diffApplied
+      name: Diff-Applied
+      priority: 1
+      type: boolean
+    - description: Reconciliation failure or diagnostics summary
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the package status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Package represents a versioned delivery artifact tracking manifest state.
           Package represents a declarative request to Package an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Package contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Package contract.
         properties:
           apiVersion:
             description: |-
@@ -933,7 +1140,7 @@ spec:
           spec:
             description: |-
               PackageSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Package contract.
+              BlanketOps Environment Package contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -947,7 +1154,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Package specification.
+                  Contract is the canonical BlanketOps Environments Package specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -1023,7 +1230,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Package status.
+                  Contract is the canonical BlanketOps Environments Package status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -1032,8 +1239,7 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -1050,14 +1256,49 @@ spec:
     singular: route
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The operational lifecycle phase of the network path
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The target domain address to match
+      jsonPath: .spec.contract.host
+      name: Host
+      type: string
+    - description: The HTTP path prefix endpoint rule matching string
+      jsonPath: .spec.contract.path
+      name: Path
+      type: string
+    - description: The underlying target service unit CR being exposed
+      jsonPath: .spec.contract.serviceUnitRef.name
+      name: Service-Unit
+      type: string
+    - description: Whether this network trajectory rule is actively serving traffic
+      jsonPath: .spec.contract.enabled
+      name: Enabled
+      type: boolean
+    - description: The load balancer host target address string output
+      jsonPath: .status.contract.resolvedAddress
+      name: Endpoint
+      priority: 1
+      type: string
+    - description: Failure diagnosis log description detailed summary
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the Route status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
+          Route declares an application ingress trajectory mapping pattern ruleset.
           Route represents a declarative request to Route an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps Route contract.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps Environments Route contract.
         properties:
           apiVersion:
             description: |-
@@ -1079,7 +1320,7 @@ spec:
           spec:
             description: |-
               RouteSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps Route contract.
+              BlanketOps Environments Route contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -1093,7 +1334,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Route specification.
+                  Contract is the canonical BlanketOps Environments Route specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -1169,7 +1410,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps Route status.
+                  Contract is the canonical BlanketOps Environments Route status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -1178,8 +1419,7 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -1196,14 +1436,45 @@ spec:
     singular: serviceunit
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The current deployment phase of the workload
+      jsonPath: .status.contract.phase
+      name: Phase
+      type: string
+    - description: The image sourcing strategy (STATIC or BUILD)
+      jsonPath: .spec.contract.type
+      name: Type
+      type: string
+    - description: The desired target replica count
+      jsonPath: .spec.contract.size
+      name: Replicas
+      type: integer
+    - description: The active image reference used at runtime
+      jsonPath: .status.contract.resolvedImage
+      name: Resolved-Image
+      type: string
+    - description: The materialized backend runtime container
+      jsonPath: .status.contract.runtime
+      name: Runtime
+      priority: 1
+      type: string
+    - description: Aggregated failure diagnostics details
+      jsonPath: .status.contract.message
+      name: Message
+      priority: 1
+      type: string
+    - description: The last time the service unit status was updated
+      jsonPath: .status.contract.lastUpdated
+      name: Last-Updated
+      priority: 1
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: |-
-          ServiceUnit represents a declarative request to ServiceUnit an artifact.
-
-          This resource is a Kubernetes-native envelope around a
-          transport-agnostic BlanketOps ServiceUnit contract.
+          ServiceUnit represents a single declarative deployable workload layout.
+          ServiceUnit represents a declarative request to serviceunit an artifact.
+          This resource is a Kubernetes-native envelope around a transport-agnostic BlanketOps  Environments ServiceUnit contract.
         properties:
           apiVersion:
             description: |-
@@ -1225,7 +1496,7 @@ spec:
           spec:
             description: |-
               ServiceUnitSpec is a Kubernetes-native envelope around the canonical
-              BlanketOps ServiceUnit contract.
+              BlanketOps Environments ServiceUnit contract.
 
               IMPORTANT:
               - Kubernetes does NOT understand the contents of `Contract`
@@ -1239,7 +1510,7 @@ spec:
             properties:
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps ServiceUnit specification.
+                  Contract is the canonical BlanketOps Environments ServiceUnit specification.
 
                   This field is intentionally opaque to Kubernetes and schema generation.
                   It is preserved verbatim by the API server.
@@ -1315,7 +1586,7 @@ spec:
                 type: array
               contract:
                 description: |-
-                  Contract is the canonical BlanketOps ServiceUnit status.
+                  Contract is the canonical BlanketOps Environments ServiceUnit status.
 
                   This field is opaque and preserved verbatim.
                 type: object
@@ -1324,8 +1595,7 @@ spec:
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
+    subresources: {}
 ---
 apiVersion: v1
 imagePullSecrets:
@@ -1650,6 +1920,269 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  name: blanketops-environments-environments-manager-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  - serviceaccounts
+  - services
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - data.packaging.carvel.dev
+  resources:
+  - packages
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - environments.blanketops.dev
+  resources:
+  - builds
+  - deployments
+  - environments
+  - packages
+  - serviceunits
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - environments.blanketops.dev
+  resources:
+  - builds/finalizers
+  - deployments/finalizers
+  - environments/finalizers
+  - packages/finalizers
+  - serviceunits/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - environments.blanketops.dev
+  resources:
+  - builds/status
+  - deployments/status
+  - environments/status
+  - packages/status
+  - serviceunits/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update
+- apiGroups:
+  - external-secrets.io
+  resources:
+  - clustersecretstores
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - external-secrets.io
+  resources:
+  - externalsecrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - helm.toolkit.fluxcd.io
+  resources:
+  - helmreleases
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - kappctrl.k14s.io
+  resources:
+  - apps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - kustomize.toolkit.fluxcd.io
+  resources:
+  - kustomizations
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - packaging.carvel.dev
+  resources:
+  - packageinstalls
+  - packagerepositories
+  - packages
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - packaging.carvel.dev
+  resources:
+  - packageinstalls/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterrolebindings
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resourceNames:
+  - blanketops-environments-package-deployer-role
+  resources:
+  - clusterroles
+  verbs:
+  - bind
+- apiGroups:
+  - shipwright.io
+  resources:
+  - buildruns
+  - builds
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - shipwright.io
+  resources:
+  - buildruns/status
+  - builds/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - source.toolkit.fluxcd.io
+  resources:
+  - gitrepositories
+  - helmrepositories
+  - ocirepositories
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - source.toolkit.fluxcd.io
+  resources:
+  - gitrepositories/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - tekton.dev
+  resources:
+  - pipelineruns
+  - pipelines
+  - taskruns
+  - tasks
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - tekton.dev
+  resources:
+  - pipelineruns/status
+  - taskruns/status
+  verbs:
+  - get
+  - patch
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
   labels:
     app.kubernetes.io/name: blanketops-environments
     app.kubernetes.io/part-of: blanketops
@@ -1878,6 +2411,89 @@ rules:
   - githubevents/status
   verbs:
   - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: blanketops-environments-events-manager-role
+rules:
+- apiGroups:
+  - argoproj.io
+  resources:
+  - eventbus
+  - eventsources
+  - sensors
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - argoproj.io
+  resources:
+  - eventsources/finalizers
+  - sensors/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - argoproj.io
+  resources:
+  - eventsources/status
+  - sensors/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - events.blanketops.dev
+  resources:
+  - githubevents
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - events.blanketops.dev
+  resources:
+  - githubevents/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - events.blanketops.dev
+  resources:
+  - githubevents/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - external-secrets.io
+  resources:
+  - externalsecrets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - rolebindings
+  - roles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -2427,6 +3043,90 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  name: blanketops-environments-networks-manager-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - certificates
+  - issuers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - networking.internal.knative.dev
+  resources:
+  - clusterdomainclaims
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - networks.blanketops.dev
+  resources:
+  - domains
+  - routes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - networks.blanketops.dev
+  resources:
+  - domains/finalizers
+  - routes/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - networks.blanketops.dev
+  resources:
+  - domains/status
+  - routes/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - serving.knative.dev
+  resources:
+  - domainmappings
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
   labels:
     app.kubernetes.io/name: blanketops-environments
     app.kubernetes.io/part-of: blanketops
@@ -2509,6 +3209,36 @@ rules:
   - routes/status
   verbs:
   - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: blanketops-environments-observers-manager-role
+rules:
+- apiGroups:
+  - environments.blanketops.dev
+  resources:
+  - packages
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - environments.blanketops.dev
+  resources:
+  - packages/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - kappctrl.k14s.io
+  resources:
+  - apps
+  verbs:
+  - get
+  - list
+  - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -2774,6 +3504,87 @@ rules:
   - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: blanketops-environments-sources-manager-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - external-secrets.io
+  resources:
+  - externalsecrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - github.upbound.io
+  resources:
+  - providerconfigs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - repo.github.upbound.io
+  resources:
+  - repositories
+  - repositorywebhooks
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - sources.blanketops.dev
+  resources:
+  - gitrepositories
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - sources.blanketops.dev
+  resources:
+  - gitrepositories/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - sources.blanketops.dev
+  resources:
+  - gitrepositories/status
+  verbs:
+  - get
+  - patch
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
@@ -2790,6 +3601,38 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: blanketops-environments-leader-election-role
+subjects:
+- kind: ServiceAccount
+  name: blanketops-environments-controller-manager
+  namespace: blanketops-environments
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+  name: blanketops-environments-environments-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: blanketops-environments-environments-manager-role
+subjects:
+- kind: ServiceAccount
+  name: blanketops-environments-controller-manager
+  namespace: blanketops-environments
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+  name: blanketops-environments-events-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: blanketops-environments-events-manager-role
 subjects:
 - kind: ServiceAccount
   name: blanketops-environments-controller-manager
@@ -2824,6 +3667,54 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: blanketops-environments-metrics-auth-role
+subjects:
+- kind: ServiceAccount
+  name: blanketops-environments-controller-manager
+  namespace: blanketops-environments
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+  name: blanketops-environments-networks-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: blanketops-environments-networks-manager-role
+subjects:
+- kind: ServiceAccount
+  name: blanketops-environments-controller-manager
+  namespace: blanketops-environments
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+  name: blanketops-environments-observers-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: blanketops-environments-observers-manager-role
+subjects:
+- kind: ServiceAccount
+  name: blanketops-environments-controller-manager
+  namespace: blanketops-environments
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/name: blanketops-environments
+    app.kubernetes.io/part-of: blanketops
+  name: blanketops-environments-sources-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: blanketops-environments-sources-manager-role
 subjects:
 - kind: ServiceAccount
   name: blanketops-environments-controller-manager
