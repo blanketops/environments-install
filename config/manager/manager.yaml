@@ -94,6 +94,11 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        # The Deployment GitOps mediator writes an ephemeral SSH key and git/ssh
+        # config under $HOME; with readOnlyRootFilesystem it must point at the
+        # writable /tmp emptyDir mounted below.
+        - name: HOME
+          value: /tmp
         ports: []
         securityContext:
           readOnlyRootFilesystem: true
@@ -122,7 +127,11 @@ spec:
           requests:
             cpu: 10m
             memory: 64Mi
-        volumeMounts: []
-      volumes: []
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      volumes:
+      - name: tmp
+        emptyDir: {}
       serviceAccountName: controller-manager
       terminationGracePeriodSeconds: 10
