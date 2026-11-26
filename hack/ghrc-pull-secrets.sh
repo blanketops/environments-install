@@ -23,7 +23,7 @@ set -euo pipefail
 NAMESPACE="${NAMESPACE:-blanketops-environments}"
 SA="${SA:-blanketops-environments-controller-manager}"
 SECRET_NAME="${SECRET_NAME:-ghcr-pull}"
-GHCR_USER="${GHCR_USER:-ntlaletsi70}"
+GHCR_USER="${GHCR_USER:-blanketops}"
 ENV_FILE="$(dirname "$0")/../.env"
 
 # ── Resolve token ─────────────────────────────────────────────────────────
